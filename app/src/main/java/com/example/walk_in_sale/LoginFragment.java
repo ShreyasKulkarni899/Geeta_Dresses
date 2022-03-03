@@ -18,13 +18,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginFragment extends Fragment {
 
-    EditText email, password;
+    TextInputLayout email, password;
     Button forgetPassword, loginBtn;
     RequestQueue requestQueue;
     float v = 0;
@@ -65,17 +66,17 @@ public class LoginFragment extends Fragment {
                 // Creating JSON Param Object
                 JSONObject object = new JSONObject();
                 try {
-                    Log.d("Email",email.getText().toString());
-                    Log.d("Password", password.getText().toString());
+                    Log.d("Email",email.getEditText().getText().toString());
+                    Log.d("Password", password.getEditText().getText().toString());
                     //input your API parameters
-                    object.put("userEmail",email.getText().toString());
-                    object.put("userPassword",password.getText().toString());
+                    object.put("userEmail",email.getEditText().getText().toString());
+                    object.put("userPassword",password.getEditText().getText().toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 // Enter the correct url for your api service site
-                String url = "http://192.168.171.12:8080/user/login/";
+                String url = "http://192.168.0.6:8080/user/login/";
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object,
                         new Response.Listener<JSONObject>() {
                             @Override
