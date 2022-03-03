@@ -66,8 +66,6 @@ public class LoginFragment extends Fragment {
                 // Creating JSON Param Object
                 JSONObject object = new JSONObject();
                 try {
-                    Log.d("Email",email.getEditText().getText().toString());
-                    Log.d("Password", password.getEditText().getText().toString());
                     //input your API parameters
                     object.put("userEmail",email.getEditText().getText().toString());
                     object.put("userPassword",password.getEditText().getText().toString());
@@ -84,21 +82,22 @@ public class LoginFragment extends Fragment {
                                 try {
                                     SharedPreferences sharedPreferences = requireContext().getSharedPreferences("tokenSharedPreferences", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    if(response.getString("status").equals("OK")){
+
+                                    if(!(response.getString("token").length() <= 1)){
                                         editor.putString("token",response.getString("token"));
                                         editor.apply();
-                                        Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
                                         String token =  sharedPreferences.getString("token","No Data");
-                                        Log.d("token",token);
+                                        Log.d("Response",response.toString());
+                                        Toast.makeText(requireContext(),"Login Successful",Toast.LENGTH_LONG).show();
                                     }
                                     else{
-                                        Toast.makeText(getContext(),"Login Failed",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(requireContext(),"Login Failed",Toast.LENGTH_LONG).show();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
-                        }, error -> Log.d("Volleys Response", error.toString()));
+                        }, error -> Toast.makeText(requireContext(),"Something Went Wrong!!",Toast.LENGTH_LONG).show());
                 requestQueue.add(jsonObjectRequest);
             }
         });

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_facebook"
+            android:title="Facebook"
+            android:icon="@drawable/facebook"/>
+        <item
+            android:id="@+id/nav_google"
+            android:title="Googlr"
+            android:icon="@drawable/google"/>
+        <item
+            android:id="@+id/nav_twitter"
+            android:title="Twitter"
+            android:icon="@drawable/twitter"/>
+
+
+    </group>
+</menu>
