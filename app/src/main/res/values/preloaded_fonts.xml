@@ -2,5 +2,6 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/im_fell_english_sc</item>
+        <item>@font/krona_one</item>
     </array>
 </resources>
