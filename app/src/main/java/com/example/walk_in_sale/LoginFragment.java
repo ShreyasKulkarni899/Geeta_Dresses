@@ -82,22 +82,16 @@ public class LoginFragment extends Fragment {
                                 try {
                                     SharedPreferences sharedPreferences = requireContext().getSharedPreferences("tokenSharedPreferences", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                                    if(!(response.getString("token").length() <= 1)){
-                                        editor.putString("token",response.getString("token"));
-                                        editor.apply();
-                                        String token =  sharedPreferences.getString("token","No Data");
-                                        Log.d("Response",response.toString());
-                                        Toast.makeText(requireContext(),"Login Successful",Toast.LENGTH_LONG).show();
-                                    }
-                                    else{
-                                        Toast.makeText(requireContext(),"Login Failed",Toast.LENGTH_LONG).show();
-                                    }
+                                    editor.putString("token",response.getString("token"));
+                                    editor.apply();
+                                    Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
+                                    String token =  sharedPreferences.getString("token","No Data");
+                                    Log.d("token",token);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
-                        }, error -> Toast.makeText(requireContext(),"Something Went Wrong!!",Toast.LENGTH_LONG).show());
+                        }, error ->Toast.makeText(getContext(),"Login Failed",Toast.LENGTH_LONG).show());
                 requestQueue.add(jsonObjectRequest);
             }
         });
