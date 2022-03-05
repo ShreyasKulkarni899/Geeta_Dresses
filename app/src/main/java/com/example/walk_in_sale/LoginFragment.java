@@ -75,7 +75,7 @@ public class LoginFragment extends Fragment {
                 }
 
                 // Enter the correct url for your api service site
-                String url = "http://192.168.0.6:8080/user/login/";
+                String url = "http://192.168.0.7:8080/user/login/";
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object,
                         new Response.Listener<JSONObject>() {
                             @Override
@@ -85,8 +85,8 @@ public class LoginFragment extends Fragment {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("token",response.getString("token"));
                                     editor.apply();
-                                    Intent HereIntent = new Intent(getContext(), Dashboard.class);
-                                    startActivity(HereIntent);
+                                    Intent loginIntent = new Intent(getContext(), Dashboard.class);
+                                    startActivity(loginIntent);
                                     Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
                                     String token =  sharedPreferences.getString("token","No Data");
                                     Log.d("token",token);

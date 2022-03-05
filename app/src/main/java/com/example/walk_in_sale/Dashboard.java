@@ -1,5 +1,13 @@
 package com.example.walk_in_sale;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,11 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
-
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -21,6 +25,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    ExtendedFloatingActionButton addOrderbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +34,13 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         Window window = Dashboard.this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.setStatusBarColor(ContextCompat.getColor(Dashboard.this, R.color.black));
+        window.setStatusBarColor(ContextCompat.getColor(Dashboard.this, R.color.white));
 
         //hocks
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbarHere);
+        addOrderbtn = findViewById(R.id.addOrderbtn);
 
         //Tool bar as action bar
         setSupportActionBar(toolbar);
@@ -46,6 +52,16 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Floating button implementation
+        addOrderbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addOrderIntent = new Intent(getApplicationContext(), AddOrder.class);
+                startActivity(addOrderIntent);
+                Toast.makeText(getApplicationContext(),"Clicked on add order",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

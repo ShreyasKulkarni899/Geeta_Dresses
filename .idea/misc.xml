@@ -4,7 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Shreyas/Vedam Labs/Android/Opsidian/app/src/main/res/drawable/button_bg.xml" value="0.1705" />
-        <entry key="..\:/Shreyas/Vedam Labs/Android/Opsidian/app/src/main/res/layout/activity_dashboard.xml" value="0.176" />
+        <entry key="..\:/Shreyas/Vedam Labs/Android/Opsidian/app/src/main/res/layout/activity_add_order.xml" value="0.25" />
+        <entry key="..\:/Shreyas/Vedam Labs/Android/Opsidian/app/src/main/res/layout/activity_dashboard.xml" value="0.2" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Opsidian/app/src/main/res/layout/activity_main.xml" value="0.21754385964912282" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Opsidian/app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Opsidian/app/src/main/res/layout/fragment_login.xml" value="0.25" />
@@ -12,9 +13,6 @@
         <entry key="..\:/Shreyas/Vedam Labs/Android/Opsidian/app/src/main/res/layout/header_navigation.xml" value="0.4" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Opsidian/app/src/main/res/layout/toolbar.xml" value="0.1" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Opsidian/app/src/main/res/menu/main_menu.xml" value="0.1" />
-        <entry key="..\:/Users/krish/AndroidStudioProjects/Walk-in-Sale/app/src/main/res/layout/activity_add_order.xml" value="0.25677083333333334" />
-        <entry key="..\:/Users/krish/AndroidStudioProjects/Walk-in-Sale/app/src/main/res/layout/activity_dashboard.xml" value="0.25677083333333334" />
-        <entry key="..\:/Users/krish/AndroidStudioProjects/Walk-in-Sale/app/src/main/res/layout/fragment_login.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/krish/AndroidStudioProjects/WalkinSale/app/src/main/res/drawable/facebook.xml" value="0.1" />
         <entry key="..\:/Users/krish/AndroidStudioProjects/WalkinSale/app/src/main/res/drawable/google.xml" value="0.1595" />
         <entry key="..\:/Users/krish/AndroidStudioProjects/WalkinSale/app/src/main/res/drawable/twitter.xml" value="0.1595" />
