@@ -14,7 +14,8 @@
         android:theme="@style/Theme.WalkinSale">
         <activity
             android:name=".Dashboard"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.actions"
