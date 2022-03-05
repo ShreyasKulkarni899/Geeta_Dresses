@@ -9,6 +9,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.UUID;
+
 
 public class MainActivity extends AppCompatActivity {
     ViewPagerAdapter viewPagerAdapter;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         facebook = findViewById(R.id.facebook_login);
         google = findViewById(R.id.google_login);
         twitter = findViewById(R.id.twitter_login);
+
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
 //        Add Fragment
