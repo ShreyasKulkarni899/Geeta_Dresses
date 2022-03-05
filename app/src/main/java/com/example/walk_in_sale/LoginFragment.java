@@ -9,12 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
@@ -59,47 +61,42 @@ public class LoginFragment extends Fragment {
         requestQueue = Volley.newRequestQueue(requireContext());
 
         // Setting On Click Listener On Button
-        loginBtn.setOnClickListener(view1 -> {
-            // Creating JSON Param Object
-            JSONObject object = new JSONObject();
-            try {
-                //input your API parameters
-                object.put("userEmail",email.getEditText().getText().toString());
-                object.put("userPassword",password.getEditText().getText().toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Creating JSON Param Object
+                JSONObject object = new JSONObject();
+                try {
+                    //input your API parameters
+                    object.put("userEmail",email.getEditText().getText().toString());
+                    object.put("userPassword",password.getEditText().getText().toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                // Enter the correct url for your api service site
+                String url = "http://192.168.0.6:8080/user/login/";
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    SharedPreferences sharedPreferences = requireContext().getSharedPreferences("tokenSharedPreferences", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("token",response.getString("token"));
+                                    editor.apply();
+                                    Intent HereIntent = new Intent(getContext(), Dashboard.class);
+                                    startActivity(HereIntent);
+                                    Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
+                                    String token =  sharedPreferences.getString("token","No Data");
+                                    Log.d("token",token);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, error ->Toast.makeText(getContext(),"Login Failed",Toast.LENGTH_LONG).show());
+                requestQueue.add(jsonObjectRequest);
             }
-
-            // Enter the correct url for your api service site
-            String url = "http://192.168.26.12:8080/user/login/";
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object,
-                    response -> {
-                        Log.d("Response:",response.toString());
-                        try {
-                            SharedPreferences sharedPreferences = requireContext().getSharedPreferences("tokenSharedPreferences", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            if(response.getString("status").equals("OK")){
-                                editor.putString("token",response.getString("token"));
-                                editor.apply();
-                                Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
-
-                                // Fetching Token From Shared Preference
-                                String token =  sharedPreferences.getString("token","No Data");
-                                Log.d("token",token);
-
-                                // Redirecting To Dashboard
-                                Intent intent = new Intent(getActivity(),Dashboard.class);
-                                startActivity(intent);
-                            }
-                            else{
-                                Toast.makeText(requireContext(),"Login Failed",Toast.LENGTH_LONG).show();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }, error ->Toast.makeText(getContext(),"Login Failed!",Toast.LENGTH_LONG).show());
-            requestQueue.add(jsonObjectRequest);
         });
         return view;
     }
