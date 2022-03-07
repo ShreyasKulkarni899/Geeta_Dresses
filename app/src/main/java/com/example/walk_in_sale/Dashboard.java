@@ -34,7 +34,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         Window window = Dashboard.this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.setStatusBarColor(ContextCompat.getColor(Dashboard.this, R.color.white));
+        window.setStatusBarColor(ContextCompat.getColor(Dashboard.this, R.color.black));
 
         //hocks
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -51,6 +51,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+       toolbar.setNavigationIcon(R.drawable.menu);
+
+
         navigationView.setNavigationItemSelectedListener(this);
 
         //Floating button implementation
@@ -62,6 +65,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 Toast.makeText(getApplicationContext(),"Clicked on add order",Toast.LENGTH_SHORT).show();
             }
         });
+
+        //For the menu icon
+
     }
 
     @Override

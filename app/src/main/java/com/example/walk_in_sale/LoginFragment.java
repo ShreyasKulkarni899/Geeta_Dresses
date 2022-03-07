@@ -75,7 +75,7 @@ public class LoginFragment extends Fragment {
                 }
 
                 // Enter the correct url for your api service site
-                String url = "http://192.168.0.7:8080/user/login/";
+                String url = "http://192.168.43.231:8080/user/login/";
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object,
                         new Response.Listener<JSONObject>() {
                             @Override

@@ -5,4 +5,5 @@
     <string name="tag_line">fashion that elevates you</string>
     <string name="navi_drawer_open">Open navigation drawer</string>
     <string name="navi_drawer_close">Close navigation drawer</string>
+    <string name="Add_Order">Add Order</string>
 </resources>
