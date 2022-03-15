@@ -29,11 +29,14 @@ public class LoginFragment extends Fragment {
     TextInputLayout email, password;
     Button forgetPassword, loginBtn;
     RequestQueue requestQueue;
+    SharedPreferences sp;
     float v = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
@@ -59,6 +62,11 @@ public class LoginFragment extends Fragment {
 
         // RequestQueue For Handle Network Request
         requestQueue = Volley.newRequestQueue(requireContext());
+        sp = requireContext().getSharedPreferences("login",Context.MODE_PRIVATE);
+        if(sp.getBoolean("isLogged",false)){
+            Intent intent = new Intent(requireContext(),Dashboard.class);
+            startActivity(intent);
+        }
 
         // Setting On Click Listener On Button
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -68,14 +76,14 @@ public class LoginFragment extends Fragment {
                 JSONObject object = new JSONObject();
                 try {
                     //input your API parameters
-                    object.put("userEmail",email.getEditText().getText().toString());
-                    object.put("userPassword",password.getEditText().getText().toString());
+                    object.put("userEmail",email.getEditText().getText().toString().trim());
+                    object.put("userPassword",password.getEditText().getText().toString().trim());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 // Enter the correct url for your api service site
-                String url = "http://192.168.43.231:8080/user/login/";
+                String url = "http://192.168.0.4:8080/user/login/";
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object,
                         new Response.Listener<JSONObject>() {
                             @Override
@@ -85,6 +93,7 @@ public class LoginFragment extends Fragment {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("token",response.getString("token"));
                                     editor.apply();
+                                    sp.edit().putBoolean("isLogged",true).apply();
                                     Intent loginIntent = new Intent(getContext(), Dashboard.class);
                                     startActivity(loginIntent);
                                     Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();

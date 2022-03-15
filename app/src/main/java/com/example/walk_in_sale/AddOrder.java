@@ -61,11 +61,23 @@ public class AddOrder extends AppCompatActivity {
 //        cancel = findViewById(R.id.cancel);
 //
 //        realm = Realm.getDefaultInstance();
-//
+
 //        realm.executeTransactionAsync(new Realm.Transaction() {
 //            @Override
-//            public void execute(Realm realm) {
-//
+//            public void execute(Realm bgRealm) {
+//                User user = bgRealm.createObject(User.class);
+//                user.setName("John");
+//                user.setEmail("john@corporation.com");
+//            }
+//        }, new Realm.Transaction.OnSuccess() {
+//            @Override
+//            public void onSuccess() {
+//                // Transaction was a success.
+//            }
+//        }, new Realm.Transaction.OnError() {
+//            @Override
+//            public void onError(Throwable error) {
+//                // Transaction failed and was automatically canceled.
 //            }
 //        });
 
