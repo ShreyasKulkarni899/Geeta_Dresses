@@ -84,27 +84,41 @@ public class LoginFragment extends Fragment {
                 }
 
                 // Enter the correct url for your api service site
-                String url = "http://192.168.0.3:8080/user/login/";
+                String url = "http://192.168.26.12:8080/user/login/";
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
                                 try {
-                                    SharedPreferences sharedPreferences = requireContext().getSharedPreferences("tokenSharedPreferences", Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putString("token",response.getString("token"));
-                                    editor.apply();
-                                    sp.edit().putBoolean("isLogged",true).apply();
-                                    Intent loginIntent = new Intent(getContext(), Dashboard.class);
-                                    startActivity(loginIntent);
-                                    Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
-                                    String token =  sharedPreferences.getString("token","No Data");
-                                    Log.d("token",token);
+                                    Boolean res = response.getString("status").equals("OK");
+                                    Log.d("Response",res.toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    String res = response.getString("token").toString();
+                                    if(res.length() >= 0){
+                                        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("tokenSharedPreferences", Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString("token",response.getString("token"));
+                                        editor.apply();
+                                        sp.edit().putBoolean("isLogged",true).apply();
+                                        Intent loginIntent = new Intent(getContext(), Dashboard.class);
+                                        startActivity(loginIntent);
+                                        Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
+                                        String token =  sharedPreferences.getString("token","No Data");
+                                        Log.d("token",token);
+                                    }
+                                    else{
+                                        Toast.makeText(getContext(),"Login Failed",Toast.LENGTH_SHORT).show();
+                                    }
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
-                        }, error ->Toast.makeText(getContext(),"Login Failed",Toast.LENGTH_LONG).show());
+                        }, error ->Toast.makeText(getContext(),"Login Failed!",Toast.LENGTH_LONG).show());
                 requestQueue.add(jsonObjectRequest);
             }
         });
