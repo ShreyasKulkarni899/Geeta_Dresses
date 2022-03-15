@@ -175,21 +175,19 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:onClick="setDate"
                     android:textColor="@color/denim_blue"
                     android:layout_marginEnd="20dp"
                     android:text="Order \n Date"
                     android:layout_weight="1"/>
 
                 <Button
-                    android:id="@+id/estimatedDeliveryDate"
+                    android:id="@+id/DeliveryDate"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/denim_blue"
-                    android:onClick="setDate"
                     android:text="Delivery \n Date"
                     android:layout_weight="1"/>
 
