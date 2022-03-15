@@ -63,6 +63,7 @@ public class LoginFragment extends Fragment {
         // RequestQueue For Handle Network Request
         requestQueue = Volley.newRequestQueue(requireContext());
         sp = requireContext().getSharedPreferences("login",Context.MODE_PRIVATE);
+
         if(sp.getBoolean("isLogged",false)){
             Intent intent = new Intent(requireContext(),Dashboard.class);
             startActivity(intent);

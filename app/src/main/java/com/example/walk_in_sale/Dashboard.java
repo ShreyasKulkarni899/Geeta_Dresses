@@ -1,9 +1,11 @@
 package com.example.walk_in_sale;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import android.view.MenuItem;
-import android.view.View;
+
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -26,6 +28,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     NavigationView navigationView;
     Toolbar toolbar;
     ExtendedFloatingActionButton addOrderbtn;
+    SharedPreferences spLogin, spToken;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +48,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         toolbar = findViewById(R.id.toolbarHere);
         addOrderbtn = findViewById(R.id.addOrderbtn);
 
+
+
         //Tool bar as action bar
         setSupportActionBar(toolbar);
 
@@ -57,16 +65,13 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         navigationView.setNavigationItemSelectedListener(this);
 
         //Floating button implementation
-        addOrderbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent addOrderIntent = new Intent(getApplicationContext(), AddOrder.class);
-                startActivity(addOrderIntent);
-                Toast.makeText(getApplicationContext(),"Clicked on add order",Toast.LENGTH_SHORT).show();
-            }
+        addOrderbtn.setOnClickListener(view -> {
+            Intent addOrderIntent = new Intent(getApplicationContext(), AddOrder.class);
+            startActivity(addOrderIntent);
+            Toast.makeText(getApplicationContext(),"Clicked on add order",Toast.LENGTH_SHORT).show();
         });
 
-        //For the menu icon
+
 
     }
 
@@ -83,6 +88,20 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return true;
+        switch (item.getItemId()){
+            case R.id.logout:
+                spLogin = getSharedPreferences("login",MODE_PRIVATE);
+                spLogin.edit().clear().apply();
+
+                spToken = getSharedPreferences("tokenSharedPreferences",MODE_PRIVATE);
+                spToken.edit().clear().apply();
+
+                Toast.makeText(this,"Logged Out Successfully",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this,MainActivity.class));
+                return  true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
