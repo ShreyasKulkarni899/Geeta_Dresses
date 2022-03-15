@@ -9,12 +9,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
+import io.realm.Realm;
+
 
 public class AddOrder extends AppCompatActivity {
+//    TextInputLayout storeName,order_date,supplierName,supplier_address;
+//    TextInputLayout order_number,status,delivery_date,transport,order_by,description;
+//    Button add,cancel;
+//    Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,27 @@ public class AddOrder extends AppCompatActivity {
             }
         });
 
+//        storeName = findViewById(R.id.storeName);
+//        order_date = findViewById(R.id.order_date);
+//        supplierName = findViewById(R.id.supplierName);
+//        supplier_address = findViewById(R.id.supplier_address);
+//        order_number = findViewById(R.id.order_number);
+//        status = findViewById(R.id.status);
+//        delivery_date = findViewById(R.id.delivery_date);
+//        transport = findViewById(R.id.transport);
+//        order_by = findViewById(R.id.order_by);
+//        description = findViewById(R.id.description);
+//        add = findViewById(R.id.add);
+//        cancel = findViewById(R.id.cancel);
+//
+//        realm = Realm.getDefaultInstance();
+//
+//        realm.executeTransactionAsync(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//
+//            }
+//        });
 
     }
 }
