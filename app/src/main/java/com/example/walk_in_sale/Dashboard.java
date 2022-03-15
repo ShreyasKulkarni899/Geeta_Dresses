@@ -29,7 +29,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     Toolbar toolbar;
     ExtendedFloatingActionButton addOrderbtn;
     SharedPreferences spLogin, spToken;
-
+    private long pressedTime;
 
 
     @Override
@@ -49,17 +49,16 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         addOrderbtn = findViewById(R.id.addOrderbtn);
 
 
-
         //Tool bar as action bar
         setSupportActionBar(toolbar);
 
         //navigation drawer menu
         navigationView.bringToFront();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navi_drawer_open,R.string.navi_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navi_drawer_open, R.string.navi_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-       toolbar.setNavigationIcon(R.drawable.menu);
+        toolbar.setNavigationIcon(R.drawable.menu);
 
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -68,9 +67,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         addOrderbtn.setOnClickListener(view -> {
             Intent addOrderIntent = new Intent(getApplicationContext(), AddOrder.class);
             startActivity(addOrderIntent);
-            Toast.makeText(getApplicationContext(),"Clicked on add order",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Clicked on add order", Toast.LENGTH_SHORT).show();
         });
-
 
 
     }
@@ -78,27 +76,36 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     @Override
     public void onBackPressed() {
 
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }else{
-            super.onBackPressed();
+        } else {
+            //super.onBackPressed();
+            if (pressedTime + 2000 > System.currentTimeMillis()) {
+                super.onBackPressed();
+                finish();
+                finishAffinity();
+            } else {
+                Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+            }
+            pressedTime = System.currentTimeMillis();
         }
 
     }
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.logout:
-                spLogin = getSharedPreferences("login",MODE_PRIVATE);
+                spLogin = getSharedPreferences("login", MODE_PRIVATE);
                 spLogin.edit().clear().apply();
 
-                spToken = getSharedPreferences("tokenSharedPreferences",MODE_PRIVATE);
+                spToken = getSharedPreferences("tokenSharedPreferences", MODE_PRIVATE);
                 spToken.edit().clear().apply();
 
-                Toast.makeText(this,"Logged Out Successfully",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this,MainActivity.class));
-                return  true;
+                Toast.makeText(this, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, MainActivity.class));
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

@@ -5,15 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 import io.realm.Realm;
@@ -24,6 +29,9 @@ public class AddOrder extends AppCompatActivity {
 //    TextInputLayout order_number,status,delivery_date,transport,order_by,description;
 //    Button add,cancel;
 //    Realm realm;
+    DatePickerDialog picker;
+    //TextInputLayout eText;
+    Button order_date, delivery_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +55,15 @@ public class AddOrder extends AppCompatActivity {
             }
         });
 
+
+
 //        storeName = findViewById(R.id.storeName);
-//        order_date = findViewById(R.id.order_date);
+            order_date = findViewById(R.id.orderDate);
 //        supplierName = findViewById(R.id.supplierName);
 //        supplier_address = findViewById(R.id.supplier_address);
 //        order_number = findViewById(R.id.order_number);
 //        status = findViewById(R.id.status);
-//        delivery_date = findViewById(R.id.delivery_date);
+            delivery_date = findViewById(R.id.DeliveryDate);
 //        transport = findViewById(R.id.transport);
 //        order_by = findViewById(R.id.order_by);
 //        description = findViewById(R.id.description);
@@ -80,6 +90,45 @@ public class AddOrder extends AppCompatActivity {
 //                // Transaction failed and was automatically canceled.
 //            }
 //        });
+
+        order_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(AddOrder.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                order_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+                picker.show();
+            }
+        });
+
+        delivery_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(AddOrder.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                delivery_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+                picker.show();
+            }
+        });
+
 
     }
 }
