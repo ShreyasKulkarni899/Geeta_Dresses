@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
@@ -29,7 +30,9 @@ public class LoginFragment extends Fragment {
     TextInputLayout email, password;
     Button forgetPassword, loginBtn;
     RequestQueue requestQueue;
-    SharedPreferences sp;
+    SharedPreferences tokenSp, loginSp;
+    JSONObject object;
+    JsonObjectRequest jsonObjectRequest;
     float v = 0;
 
     @Override
@@ -62,63 +65,66 @@ public class LoginFragment extends Fragment {
 
         // RequestQueue For Handle Network Request
         requestQueue = Volley.newRequestQueue(requireContext());
-        sp = requireContext().getSharedPreferences("login",Context.MODE_PRIVATE);
+        loginSp = requireContext().getSharedPreferences("login",Context.MODE_PRIVATE);
 
-        if(sp.getBoolean("isLogged",false)){
+        if(loginSp.getBoolean("isLogged",false)){
             Intent intent = new Intent(requireContext(),Dashboard.class);
             startActivity(intent);
         }
 
-        // Setting On Click Listener On Button
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Creating JSON Param Object
-                JSONObject object = new JSONObject();
+
+                // URL
+                String url  = "http://192.168.0.8:8080/user/login/";
+
+                // Creating Json Object For Post Request
                 try {
-                    //input your API parameters
+                    object = new JSONObject();
                     object.put("userEmail",email.getEditText().getText().toString().trim());
                     object.put("userPassword",password.getEditText().getText().toString().trim());
-                } catch (JSONException e) {
+                }
+                catch (JSONException e){
                     e.printStackTrace();
                 }
 
-                // Enter the correct url for your api service site
-                String url = "http://192.168.26.12:8080/user/login/";
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                try {
-                                    Boolean res = response.getString("status").equals("OK");
-                                    Log.d("Response",res.toString());
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                // Creating a request
+                jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("VolleyResponse",response.toString());
+                        try {
+                            Boolean result = response.getString("status").equals("OK");
+                            if(result){
+                                // Storing Token Into Shared Preference
+                                tokenSp = requireContext().getSharedPreferences("tokenSharedPreferences",Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = tokenSp.edit();
+                                editor.putString("token",response.getString("token"));
+                                editor.apply();
 
-                                try {
-                                    String res = response.getString("token").toString();
-                                    if(res.length() >= 0){
-                                        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("tokenSharedPreferences", Context.MODE_PRIVATE);
-                                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                                        editor.putString("token",response.getString("token"));
-                                        editor.apply();
-                                        sp.edit().putBoolean("isLogged",true).apply();
-                                        Intent loginIntent = new Intent(getContext(), Dashboard.class);
-                                        startActivity(loginIntent);
-                                        Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
-                                        String token =  sharedPreferences.getString("token","No Data");
-                                        Log.d("token",token);
-                                    }
-                                    else{
-                                        Toast.makeText(getContext(),"Login Failed",Toast.LENGTH_SHORT).show();
-                                    }
+                                // Saving Login Session
+                                loginSp.edit().putBoolean("isLogged", true).apply();
 
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                                // Success Message and Redirecting
+                                Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(getActivity(),Dashboard.class));
                             }
-                        }, error ->Toast.makeText(getContext(),"Login Failed!",Toast.LENGTH_LONG).show());
+                            else{
+                                Toast.makeText(getContext(),"Login Unsuccessful",Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(requireContext(),"Something Went Wrong",Toast.LENGTH_LONG);
+                        error.printStackTrace();
+                    }
+                });
                 requestQueue.add(jsonObjectRequest);
             }
         });
