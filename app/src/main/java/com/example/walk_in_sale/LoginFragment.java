@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.walk_in_sale.constants.Constant;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
@@ -32,6 +33,7 @@ public class LoginFragment extends Fragment {
     RequestQueue requestQueue;
     SharedPreferences tokenSp, loginSp;
     JSONObject object;
+    Constant constant;
     JsonObjectRequest jsonObjectRequest;
     float v = 0;
 
@@ -75,9 +77,10 @@ public class LoginFragment extends Fragment {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                constant = new Constant();
                 // URL
-                String url  = "http://3.109.59.248:8080/user/login/";
+                String url = constant.getURL()+constant.getPORT()+constant.getUSER_LOGIN();
+                //String url  = "http://3.109.59.248:8080/user/login/";
 
                 // Creating Json Object For Post Request
                 try {
