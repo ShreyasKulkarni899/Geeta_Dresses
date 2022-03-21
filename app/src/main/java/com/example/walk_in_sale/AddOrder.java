@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -31,7 +33,10 @@ public class AddOrder extends AppCompatActivity {
 //    Realm realm;
     DatePickerDialog picker;
     //TextInputLayout eText;
-    Button order_date, delivery_date;
+
+    TextInputLayout storeName, supplierName, order_number, status;
+    Button order_date, delivery_date, add_btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +61,18 @@ public class AddOrder extends AppCompatActivity {
         });
 
 
-
-//        storeName = findViewById(R.id.storeName);
-            order_date = findViewById(R.id.orderDate);
-//        supplierName = findViewById(R.id.supplierName);
+        storeName = findViewById(R.id.storeName);
+        order_date = findViewById(R.id.orderDate);
+        supplierName = findViewById(R.id.supplierName);
 //        supplier_address = findViewById(R.id.supplier_address);
-//        order_number = findViewById(R.id.order_number);
-//        status = findViewById(R.id.status);
-            delivery_date = findViewById(R.id.DeliveryDate);
+        order_number = findViewById(R.id.order_number);
+        status = findViewById(R.id.status);
+        delivery_date = findViewById(R.id.DeliveryDate);
 //        transport = findViewById(R.id.transport);
 //        order_by = findViewById(R.id.order_by);
 //        description = findViewById(R.id.description);
-//        add = findViewById(R.id.add);
-//        cancel = findViewById(R.id.cancel);
+        add_btn = findViewById(R.id.add);
+
 //
 //        realm = Realm.getDefaultInstance();
 
@@ -128,7 +132,81 @@ public class AddOrder extends AppCompatActivity {
                 picker.show();
             }
         });
+        add_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAlertDialogButtonClicked(view);
+            }
+        });
+    }
+
+    public void showAlertDialogButtonClicked(View view) {
+
+        // Create an alert builder
+        AlertDialog.Builder builder
+                = new AlertDialog.Builder(this);
+        //builder.setTitle("Order Details");
 
 
+        // set the custom layout
+        final View customLayout
+                = getLayoutInflater()
+                .inflate(
+                        R.layout.custom_layout,
+                        null);
+        builder.setView(customLayout);
+
+        // Adding the details of the order in the dialog box for palcing the order
+        TextView storeNameOrder = customLayout.findViewById(R.id.storeNameOrder);
+        TextView supplierNameOrder = customLayout.findViewById(R.id.supplierNameOrder);
+        TextView orderNumber = customLayout.findViewById(R.id.orderNumberOrder);
+        TextView statusOrder = customLayout.findViewById(R.id.statusOrder);
+        storeNameOrder.setText(storeName.getEditText().getText().toString().toUpperCase());
+        supplierNameOrder.setText(supplierName.getEditText().getText().toString().toUpperCase());
+        orderNumber.setText(order_number.getEditText().getText().toString().toUpperCase());
+        statusOrder.setText(status.getEditText().getText().toString().toUpperCase());
+
+
+        // add a button
+
+        builder
+                .setPositiveButton(
+                        "Place the Order",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(
+                                    DialogInterface dialog,
+                                    int which) {
+
+                                // send data from the
+                                // AlertDialog to the Activity
+
+
+//                                EditText editText
+//                                        = customLayout
+//                                        .findViewById(
+//                                                R.id.editText);
+                                sendDialogDataToActivity("HIIIIII");
+                            }
+                        });
+
+        // create and show
+        // the alert dialog
+        AlertDialog dialog
+                = builder.create();
+        dialog.show();
+    }
+
+    // Do something with the data
+    // coming from the AlertDialog
+
+    private void sendDialogDataToActivity(String data) {
+        Toast.makeText(this,
+                data,
+                Toast.LENGTH_SHORT)
+                .show();
     }
 }
+
+
