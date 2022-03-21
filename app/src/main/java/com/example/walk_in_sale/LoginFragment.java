@@ -77,7 +77,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
 
                 // URL
-                String url  = "http://192.168.0.8:8080/user/login/";
+                String url  = "http://3.109.59.248:8080/user/login/";
 
                 // Creating Json Object For Post Request
                 try {
@@ -121,7 +121,7 @@ public class LoginFragment extends Fragment {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(requireContext(),"Something Went Wrong",Toast.LENGTH_LONG);
+                        Toast.makeText(requireContext(),"Something Went Wrong",Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 });

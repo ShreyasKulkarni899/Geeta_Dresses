@@ -54,6 +54,36 @@ public class Order extends RealmObject {
 
     private Date timeStamp;
 
+    private String status;
+
+    private String supplierAddress;
+
+    public String getSupplierAddress() {
+        return supplierAddress;
+    }
+
+    public void setSupplierAddress(String supplierAddress) {
+        this.supplierAddress = supplierAddress;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    private String description;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public long getOrderNo() {
         return orderNo;
     }
