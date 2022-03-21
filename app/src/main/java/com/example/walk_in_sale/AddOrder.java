@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -24,18 +26,15 @@ import java.util.Objects;
 import io.realm.Realm;
 
 
-public class AddOrder extends AppCompatActivity {
-    TextInputLayout storeName,supplierName,supplier_address;
-    TextInputLayout order_number,status,transport,order_by,description;
-    Button add,cancel,order_date, delivery_date;
+public class AddOrder<realm> extends AppCompatActivity {
+    TextInputLayout storeName, supplierName, supplier_address;
+    TextInputLayout order_number, status, transport, order_by, description;
+    Button add_btn, cancel, order_date, delivery_date, add;
     Realm realm;
     DatePickerDialog picker;
     //TextInputLayout eText;
 
-    TextInputLayout storeName, supplierName, order_number, status;
-    Button order_date, delivery_date, add_btn;
-
-   String order_date_str,delivery_date_str;
+    String order_date_str, delivery_date_str;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +119,7 @@ public class AddOrder extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 order_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                                 String str = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                                setOrder_date_str(str);
+                                //setOrder_date_str(str);
 
                             }
                         }, year, month, day);
@@ -212,176 +211,8 @@ public class AddOrder extends AppCompatActivity {
         dialog.show();
     }
 
-    // Do something with the data
-    // coming from the AlertDialog
-        realm = Realm.getDefaultInstance();
-
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm bgRealm) {
-//                TextInputLayout storeName,supplierName,supplier_address;
-//                TextInputLayout order_number,status,transport,order_by,description;
-                Order order = bgRealm.createObject(Order.class);
-
-                order.setStoreName(storeName.getEditText().getText().toString());
-                order.setSupplierName(supplierName.getEditText().getText().toString());
-                order.setOrderNo(Long.parseLong(order_number.getEditText().getText().toString()));
-                order.setStatus(status.getEditText().getText().toString());
-                order.setTransportId(transport.getEditText().getText().toString());
-                order.setOrderedByName(order_by.getEditText().getText().toString());
-                order.setDescription(description.getEditText().getText().toString());
-                order.setSupplierAddress(supplier_address.getEditText().getText().toString());
-
-
-            }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                // Transaction was a success.
-            }
-        }, new Realm.Transaction.OnError() {
-            @Override
-            public void onError(Throwable error) {
-                // Transaction failed and was automatically canceled.
-            }
-        });
-
-
-
-
-    }
-    public TextInputLayout getStoreName() {
-        return storeName;
-    }
-
-    public void setStoreName(TextInputLayout storeName) {
-        this.storeName = storeName;
-    }
-
-    public TextInputLayout getSupplierName() {
-        return supplierName;
-    }
-
-    public void setSupplierName(TextInputLayout supplierName) {
-        this.supplierName = supplierName;
-    }
-
-    public TextInputLayout getSupplier_address() {
-        return supplier_address;
-    }
-
-    public void setSupplier_address(TextInputLayout supplier_address) {
-        this.supplier_address = supplier_address;
-    }
-
-    public TextInputLayout getOrder_number() {
-        return order_number;
-    }
-
-    public void setOrder_number(TextInputLayout order_number) {
-        this.order_number = order_number;
-    }
-
-    public TextInputLayout getStatus() {
-        return status;
-    }
-
-    public void setStatus(TextInputLayout status) {
-        this.status = status;
-    }
-
-    public TextInputLayout getTransport() {
-        return transport;
-    }
-
-    public void setTransport(TextInputLayout transport) {
-        this.transport = transport;
-    }
-
-    public TextInputLayout getOrder_by() {
-        return order_by;
-    }
-
-    public void setOrder_by(TextInputLayout order_by) {
-        this.order_by = order_by;
-    }
-
-    public TextInputLayout getDescription() {
-        return description;
-    }
-
-    public void setDescription(TextInputLayout description) {
-        this.description = description;
-    }
-
-    public Button getAdd() {
-        return add;
-    }
-
-    public void setAdd(Button add) {
-        this.add = add;
-    }
-
     private void sendDialogDataToActivity(String data) {
-        Toast.makeText(this,
-                data,
-                Toast.LENGTH_SHORT)
-                .show();
-    public Button getCancel() {
-        return cancel;
-    }
-
-    public void setCancel(Button cancel) {
-        this.cancel = cancel;
-    }
-
-    public Button getOrder_date() {
-        return order_date;
-    }
-
-    public void setOrder_date(Button order_date) {
-        this.order_date = order_date;
-    }
-
-    public Button getDelivery_date() {
-        return delivery_date;
-    }
-
-    public void setDelivery_date(Button delivery_date) {
-        this.delivery_date = delivery_date;
-    }
-
-    public Realm getRealm() {
-        return realm;
-    }
-
-    public void setRealm(Realm realm) {
-        this.realm = realm;
-    }
-
-    public DatePickerDialog getPicker() {
-        return picker;
-    }
-
-    public void setPicker(DatePickerDialog picker) {
-        this.picker = picker;
-    }
-
-    public String getOrder_date_str() {
-        return order_date_str;
-    }
-
-    public void setOrder_date_str(String order_date_str) {
-        this.order_date_str = order_date_str;
-    }
-
-    public String getDelivery_date_str() {
-        return delivery_date_str;
-    }
-
-    public void setDelivery_date_str(String delivery_date_str) {
-        this.delivery_date_str = delivery_date_str;
+        Toast.makeText(getBaseContext(), data, Toast.LENGTH_SHORT).show();
     }
 }
-
 
