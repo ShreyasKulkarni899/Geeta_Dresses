@@ -120,6 +120,7 @@ public class AddOrder<realm> extends AppCompatActivity {
                                 order_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                                 String str = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                                 //setOrder_date_str(str);
+                                order_date_str = delivery_date_str = year +"/"+monthOfYear+"/"+dayOfMonth+" 00:00";
 
                             }
                         }, year, month, day);
@@ -140,6 +141,8 @@ public class AddOrder<realm> extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 delivery_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                               // 2014/11/20 04:11
+                                 delivery_date_str = year +"/"+monthOfYear+"/"+dayOfMonth+" 00:00";
                             }
                         }, year, month, day);
                 picker.show();

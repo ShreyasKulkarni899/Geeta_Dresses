@@ -80,7 +80,7 @@ public class LoginFragment extends Fragment {
                 constant = new Constant();
                 // URL
                 String url = constant.getURL()+constant.getPORT()+constant.getUSER_LOGIN();
-                //String url  = "http://3.109.59.248:8080/user/login/";
+                //String url  = "http://  :8080/user/login/";
 
                 // Creating Json Object For Post Request
                 try {

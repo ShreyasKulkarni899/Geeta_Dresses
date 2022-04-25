@@ -13,6 +13,10 @@
             android:id="@+id/nav_twitter"
             android:title="Twitter"
             android:icon="@drawable/twitter"/>
+        <item
+            android:id="@+id/nav_token"
+            android:title="Token"
+            android:icon="@drawable/ic_token"/>
 
 
     </group>
