@@ -95,7 +95,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
         switch (item.getItemId()) {
+            case R.id.nav_token:
+                startActivity(new Intent(this, tokenHome.class));
+                return true;
             case R.id.logout:
                 spLogin = getSharedPreferences("login", MODE_PRIVATE);
                 spLogin.edit().clear().apply();
@@ -109,7 +113,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 Toast.makeText(this, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, MainActivity.class));
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
