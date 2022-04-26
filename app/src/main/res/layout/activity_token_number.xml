@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/token_header"
-    tools:context=".tokenHome">
+
+    tools:context=".tokenNumberCreation">
 
     <Button
-        android:id="@+id/backButtonTokenHome"
+        android:id="@+id/backButtonTokenNumber"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_back_btn"
@@ -23,82 +23,113 @@
         android:id="@+id/imageView"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="80dp"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/userName"
+        android:id="@+id/userNameTokenNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|center_horizontal|center_vertical"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="100dp"
         android:fontFamily="@font/lexend_exa"
         android:gravity="center|center_horizontal"
         android:text="User"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/userDescription"
+        android:id="@+id/userDescriptionTokenNumber"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center|center_horizontal|center_vertical"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lexend_exa"
         android:gravity="center|center_horizontal"
         android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.808"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName" />
+        app:layout_constraintTop_toBottomOf="@+id/userNameTokenNumber" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="96dp"
         android:fontFamily="@font/lexend_exa"
-        android:text="Token Number"
+        android:text="New Customer"
         android:textColor="@color/black"
-        android:textSize="24dp"
+        android:textSize="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/userDescriptionTokenNumber" />
 
-    <Button
-        android:id="@+id/createTokenBTN"
-        android:layout_width="303dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="64dp"
-        android:backgroundTint="@color/grey"
-        android:text="Create Token"
-        android:textSize="18sp"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/lexend_exa"
+        android:text="New Token Number"
+        android:textColor="@color/black"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+    <TextView
+        android:id="@+id/tokenNumberBig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/back_token_number"
+        android:fontFamily="@font/lexend_exa"
+        android:gravity="center_horizontal"
+        android:text="#111"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="90dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
     <Button
-        android:id="@+id/existingTokenBTN"
+        android:id="@+id/attendToken"
         android:layout_width="303dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="228dp"
+        android:layout_marginTop="92dp"
         android:backgroundTint="@color/grey"
-        android:text="Existing Token"
+        android:text="Attend"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tokenNumberBig" />
+
+    <Button
+        android:id="@+id/leaveToken"
+        android:layout_width="303dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/grey"
+        android:text="Leave"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createTokenBTN"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/attendToken"
+        app:layout_constraintVertical_bias="0.018" />
 </androidx.constraintlayout.widget.ConstraintLayout>

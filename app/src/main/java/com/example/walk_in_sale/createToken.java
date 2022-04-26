@@ -10,22 +10,21 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class tokenHome extends AppCompatActivity {
-    //variables
+public class createToken extends AppCompatActivity {
     TextView userName, userDescription;
     SharedPreferences userSP;
-    Button backBTN, createTokenBTN, existingBTN;
+    Button backBTN, newCustomerBTN, loyalCustomerBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_token_home);
+        setContentView(R.layout.activity_create_token);
         //hocks
-        userName = findViewById(R.id.userName);
-        userDescription = findViewById(R.id.userDescription);
-        backBTN = findViewById(R.id.backButtonTokenHome);
-        createTokenBTN = findViewById(R.id.createTokenBTN);
-        existingBTN = findViewById(R.id.existingTokenBTN);
+        userName = findViewById(R.id.userNameCreate);
+        userDescription = findViewById(R.id.userDescriptionCreate);
+        backBTN = findViewById(R.id.backButtonCreateToken);
+        newCustomerBTN = findViewById(R.id.newCustomerBTN);
+        loyalCustomerBTN = findViewById(R.id.loyalCustomerBTN);
 
         //User data part with SP
         userSP = getSharedPreferences("userMetadata", MODE_PRIVATE);
@@ -41,20 +40,21 @@ public class tokenHome extends AppCompatActivity {
             }
         });
         //createTokenBTN code
-        createTokenBTN.setOnClickListener(new View.OnClickListener() {
+        newCustomerBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent createTokenIntent = new Intent(getApplicationContext(), createToken.class);
-                startActivity(createTokenIntent);
+                Intent tokenNumberIntent = new Intent(getApplicationContext(), tokenNumberCreation.class);
+                startActivity(tokenNumberIntent);
+                //Toast.makeText(getApplicationContext(), "Clicked on new customer", Toast.LENGTH_SHORT).show();
             }
         });
         //existinTokenBTN code
-        existingBTN.setOnClickListener(new View.OnClickListener() {
+        loyalCustomerBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Intent createTokenIntent = new Intent(getApplicationContext(), crateToken.class);
                 //startActivity(createTokenIntent);
-                Toast.makeText(getApplicationContext(), "Clicked on Existing Token", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Clicked on loyal customer", Toast.LENGTH_SHORT).show();
             }
         });
     }
