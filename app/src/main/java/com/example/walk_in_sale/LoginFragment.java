@@ -23,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.walk_in_sale.constants.Constant;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,7 +32,7 @@ public class LoginFragment extends Fragment {
     TextInputLayout email, password;
     Button forgetPassword, loginBtn;
     RequestQueue requestQueue;
-    SharedPreferences tokenSp, loginSp;
+    SharedPreferences tokenSp, loginSp, userSP;
     JSONObject object;
     Constant constant;
     JsonObjectRequest jsonObjectRequest;
@@ -97,14 +98,27 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("VolleyResponse",response.toString());
+
                         try {
                             Boolean result = response.getString("status").equals("OK");
                             if(result){
+
                                 // Storing Token Into Shared Preference
                                 tokenSp = requireContext().getSharedPreferences("tokenSharedPreferences",Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = tokenSp.edit();
                                 editor.putString("token",response.getString("token"));
                                 editor.apply();
+
+                                // Saving User Data In Shared Preferences
+                                JSONArray dataArray = response.getJSONArray("data");
+                                JSONObject data = (JSONObject) dataArray.get(0);
+                                userSP = requireContext().getSharedPreferences("userMetadata",Context.MODE_PRIVATE);
+                                SharedPreferences.Editor userEditor = userSP.edit();
+                                editor.putString("userName", data.getString("userName"));
+                                editor.putString("userEmail", data.getString("userEmail"));
+                                editor.apply();
+                                Log.d("User Name",data.getString("userName"));
+                                Log.d("User Email",data.getString("userEmail"));
 
                                 // Saving Login Session
                                 loginSp.edit().putBoolean("isLogged", true).apply();
