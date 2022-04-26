@@ -28,7 +28,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     NavigationView navigationView;
     Toolbar toolbar;
     ExtendedFloatingActionButton addOrderbtn;
-    SharedPreferences spLogin, spToken;
+    SharedPreferences spLogin, spToken, spUserData;
     private long pressedTime;
 
 
@@ -102,6 +102,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
                 spToken = getSharedPreferences("tokenSharedPreferences", MODE_PRIVATE);
                 spToken.edit().clear().apply();
+
+                spUserData = getSharedPreferences("userMetadata",MODE_PRIVATE);
+                spUserData.edit().clear().apply();
 
                 Toast.makeText(this, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, MainActivity.class));
