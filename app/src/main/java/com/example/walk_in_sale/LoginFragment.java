@@ -114,9 +114,9 @@ public class LoginFragment extends Fragment {
                                 JSONObject data = (JSONObject) dataArray.get(0);
                                 userSP = requireContext().getSharedPreferences("userMetadata",Context.MODE_PRIVATE);
                                 SharedPreferences.Editor userEditor = userSP.edit();
-                                editor.putString("userName", data.getString("userName"));
-                                editor.putString("userEmail", data.getString("userEmail"));
-                                editor.apply();
+                                userEditor.putString("userName", data.getString("userName"));
+                                userEditor.putString("userEmail", data.getString("userEmail"));
+                                userEditor.apply();
                                 Log.d("User Name",data.getString("userName"));
                                 Log.d("User Email",data.getString("userEmail"));
 
