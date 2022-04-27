@@ -17,7 +17,8 @@
         app:layout_constraintHorizontal_bias="0.029"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.017" />
+        app:layout_constraintVertical_bias="0.017"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -97,7 +98,6 @@
         android:background="@drawable/back_token_number"
         android:fontFamily="@font/lexend_exa"
         android:gravity="center_horizontal"
-        android:text="#111"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="90dp"
