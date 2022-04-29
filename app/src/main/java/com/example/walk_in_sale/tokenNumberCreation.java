@@ -2,6 +2,7 @@ package com.example.walk_in_sale;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -65,10 +66,12 @@ public class tokenNumberCreation extends AppCompatActivity {
             public void onClick(View view) {
                 //Intent createTokenIntent = new Intent(getApplicationContext(), createToken.class);
                 //startActivity(createTokenIntent);
-                Toast.makeText(getApplicationContext(), "Clicked on attend", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Clicked on attend", Toast.LENGTH_SHORT).show();
                 String getTokenText = tokenNumber.getText().toString();
                 String userNameText = userName.getText().toString();
                 updateToken(getTokenText,userNameText);
+                Intent intent = new Intent(tokenNumberCreation.this,createToken.class);
+                startActivity(intent);
             }
         });
         //existinTokenBTN code
@@ -98,8 +101,10 @@ public class tokenNumberCreation extends AppCompatActivity {
                 //Log.d("String Request Response",response.toString());
                 try {
                     tokenNumber.setText(response.getString("counter"));
+                    Toast.makeText(getApplicationContext(),"Token Created!",Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),"Token Creation Failed!",Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -107,6 +112,7 @@ public class tokenNumberCreation extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.d("String Request Error",error.toString());
                 tokenNumber.setText("---");
+                Toast.makeText(getApplicationContext(),"Token Creation Failed!",Toast.LENGTH_SHORT).show();
             }
         });
         requestQueue.add(tokenRequest);
