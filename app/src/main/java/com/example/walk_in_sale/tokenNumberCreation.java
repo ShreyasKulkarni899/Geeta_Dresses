@@ -70,7 +70,7 @@ public class tokenNumberCreation extends AppCompatActivity {
                 String getTokenText = tokenNumber.getText().toString();
                 String userNameText = userName.getText().toString();
                 updateToken(getTokenText,userNameText);
-                Intent intent = new Intent(tokenNumberCreation.this,createToken.class);
+                Intent intent = new Intent(tokenNumberCreation.this,tokenDashboard.class);
                 startActivity(intent);
             }
         });
@@ -80,7 +80,9 @@ public class tokenNumberCreation extends AppCompatActivity {
             public void onClick(View view) {
                 //Intent createTokenIntent = new Intent(getApplicationContext(), crateToken.class);
                 //startActivity(createTokenIntent);
-                Toast.makeText(getApplicationContext(), "Clicked on leave", Toast.LENGTH_SHORT).show();
+                finish();
+                onBackPressed();
+                //Toast.makeText(getApplicationContext(), "Clicked on leave", Toast.LENGTH_SHORT).show();
             }
         });
     }

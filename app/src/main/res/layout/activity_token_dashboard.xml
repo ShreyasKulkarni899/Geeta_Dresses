@@ -9,13 +9,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
         <Button
             android:id="@+id/backButtonTokenNumber"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:background="@drawable/ic_back_btn"
+            android:layout_gravity="start"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
@@ -25,7 +27,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center|top"
-            android:gravity="top"
+            android:gravity="top|center"
             android:layout_marginTop="-77dp">
 
             <ImageView
@@ -33,13 +35,13 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="80dp"
+                android:layout_gravity="top|center_horizontal"
                 android:src="@drawable/logo" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="top">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/userNameTokenNumber"
@@ -74,12 +76,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|center_horizontal|center_vertical"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/lexend_exa"
             android:gravity="center|center_horizontal"
             android:text="Add Product By"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
             />
         <LinearLayout
             android:layout_width="wrap_content"
@@ -94,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/grey"
                 android:text="Barcode"
-                android:textSize="18dp"
+                android:textSize="14dp"
 
                 android:layout_marginTop="5dp"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
@@ -104,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/grey"
                 android:text="Scan"
-                android:textSize="18dp"
+                android:textSize="14dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
@@ -114,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/grey"
                 android:text="name"
-                android:textSize="18dp"
+                android:textSize="14dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
@@ -125,28 +127,57 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/lexend_exa"
             android:gravity="center|center_horizontal"
             android:text="Products"
             android:textColor="@color/black"
-            android:textSize="32sp"
+            android:textSize="24sp"
             />
     <LinearLayout
-        android:layout_width="550dp"
+        android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
         android:background="@drawable/recyler_back"
         android:layout_gravity="center"
-        android:gravity="center">
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/lexend_exa"
+                android:gravity="center|center_horizontal"
+                android:text="Products            "
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:id="@+id/textView77"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/lexend_exa"
+                android:gravity="center|center_horizontal"
+                android:text="QTY"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                />
+
+        </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/idRVCourse"
             android:layout_width="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_margin="5dp"
             android:layout_height="match_parent" />
 
     </LinearLayout>
@@ -157,8 +188,8 @@
             android:backgroundTint="@color/grey"
             android:layout_gravity="center"
             android:text="next"
-            android:textSize="32dp"
-            android:layout_marginTop="10dp"
+            android:textSize="24dp"
+            android:layout_marginTop="5dp"
             tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     </LinearLayout>
