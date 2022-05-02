@@ -7,6 +7,11 @@ public class Constant {
     final  String USER_LOGIN = "/user/login";
     final  String GET_TOKEN = "/counter/getCurrentValue?sequenceName=tokenNumber";
     final String UPDATE_TOKEN = "/token/";
+    final String GET_TOKEN_DETAILS = "/token?tokenNumber=";
+
+    public String getGET_TOKEN_DETAILS() {
+        return GET_TOKEN_DETAILS;
+    }
 
     public String getUPDATE_TOKEN() {
         return UPDATE_TOKEN;

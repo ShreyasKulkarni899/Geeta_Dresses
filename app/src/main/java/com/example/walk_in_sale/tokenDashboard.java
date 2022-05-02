@@ -4,15 +4,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.walk_in_sale.constants.Constant;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class tokenDashboard extends AppCompatActivity {
     private RecyclerView courseRV;
+    Constant constant;
+    RequestQueue requestQueue;
+    JsonObjectRequest jsonObjectRequest;
+    JSONObject object;
     Button backBTN, barcodeBTN, scanBTN, nameBTN, nextBTN;
 
     // Arraylist for storing data
@@ -30,6 +48,41 @@ public class tokenDashboard extends AppCompatActivity {
 
         // here we have created new array list and added data to it.
         productsModelArrayList = new ArrayList<>();
+
+        // Using Constants
+        constant = new Constant();
+        // URL
+        String url = constant.getURL() + constant.getPORT() + constant.getGET_TOKEN_DETAILS() + "100";
+        // Setting up request queue
+        requestQueue = Volley.newRequestQueue(this);
+        object = new JSONObject();
+
+        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, object, new Response.Listener<JSONObject>() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.d("Token Response",response.toString());
+                    JSONArray data_array = response.getJSONArray("data");
+                    JSONObject data = (JSONObject) data_array.get(0);
+                    Log.d("Token Data",data.toString());
+                    Log.d("Product Names", String.valueOf(data.getJSONArray("productName")));
+                    //JSONArray product_array = data.getJSONArray("")
+                } catch (JSONException e) {
+                    Log.d("Failed Token Data Request",e.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        requestQueue.add(jsonObjectRequest);
+
+
+
         String productName = "Mens formal shirts";
         String qty = "4";
         for(int i=1;i<=200;i++){
