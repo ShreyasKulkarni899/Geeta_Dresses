@@ -1,6 +1,5 @@
 package com.example.walk_in_sale.models;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import io.realm.RealmObject;

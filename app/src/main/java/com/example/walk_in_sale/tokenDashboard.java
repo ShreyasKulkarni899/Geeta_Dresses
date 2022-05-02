@@ -1,14 +1,20 @@
 package com.example.walk_in_sale;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,6 +38,8 @@ public class tokenDashboard extends AppCompatActivity {
     JsonObjectRequest jsonObjectRequest;
     JSONObject object;
     Button backBTN, barcodeBTN, scanBTN, nameBTN, nextBTN;
+    TextView userName, currentTokenNumber;
+    SharedPreferences userSP;
 
     // Arraylist for storing data
     private ArrayList<productsModel> productsModelArrayList;
@@ -39,6 +47,20 @@ public class tokenDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_token_dashboard);
+        Window window = tokenDashboard.this.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(ContextCompat.getColor(tokenDashboard.this, R.color.black));
+        //hocks
+        userName = findViewById(R.id.userNameTokenNumber);
+        currentTokenNumber = findViewById(R.id.userCurrentTokenNo);
+        //User data part with SP
+        userSP = getSharedPreferences("userMetadata", MODE_PRIVATE);
+        userName.setText(userSP.getString("userName", ""));
+        currentTokenNumber.setText("Token No - "+userSP.getString("tokenNumber",""));
+
+
+        //hocks
         courseRV = findViewById(R.id.idRVCourse);
         backBTN = findViewById(R.id.backButtonTokenNumber);
         barcodeBTN = findViewById(R.id.barcodeBTN);
@@ -85,9 +107,9 @@ public class tokenDashboard extends AppCompatActivity {
 
         String productName = "Mens formal shirts";
         String qty = "4";
-        for(int i=1;i<=200;i++){
-            productsModelArrayList.add(new productsModel(productName,qty));
-        }
+//        for(int i=1;i<=200;i++){
+//            productsModelArrayList.add(new productsModel(productName,qty));
+//        }
 
 
         // we are initializing our adapter class and passing our arraylist to it.
@@ -134,8 +156,8 @@ public class tokenDashboard extends AppCompatActivity {
         nextBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent createTokenIntent = new Intent(getApplicationContext(), crateToken.class);
-                //startActivity(createTokenIntent);
+                Intent Intent = new Intent(getApplicationContext(), billToken.class);
+                startActivity(Intent);
                 Toast.makeText(getApplicationContext(), "Clicked on next", Toast.LENGTH_SHORT).show();
             }
         });

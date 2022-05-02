@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="5dp"
     app:cardElevation="2dp"
@@ -36,7 +36,7 @@
             android:layout_marginTop="-8dp"
             android:background="@drawable/ic_baseline_minimize_24"
             android:backgroundTint="@color/black"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            />
 
         <TextView
             android:id="@+id/idProductsQTY"
@@ -55,7 +55,7 @@
             android:layout_marginStart="15dp"
             android:background="@drawable/ic_plus_24px"
             android:backgroundTint="@color/black"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            />
 
         <Button
             android:id="@+id/productsDeleteBTN"

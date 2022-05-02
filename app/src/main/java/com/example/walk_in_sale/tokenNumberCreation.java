@@ -1,12 +1,15 @@
 package com.example.walk_in_sale;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +19,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.walk_in_sale.constants.Constant;
 
@@ -36,6 +38,10 @@ public class tokenNumberCreation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_token_number);
+        Window window = tokenNumberCreation.this.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(ContextCompat.getColor(tokenNumberCreation.this, R.color.black));
         //hocks
         userName = findViewById(R.id.userNameTokenNumber);
         userDescription = findViewById(R.id.userDescriptionTokenNumber);
@@ -132,6 +138,9 @@ public class tokenNumberCreation extends AppCompatActivity {
         try {
             updatedData.put("username",userNameText);
             updatedData.put("tokenNumber",getTokenText);
+            SharedPreferences.Editor tokenEdit = userSP.edit();
+            tokenEdit.putString("tokenNumber",getTokenText);
+            tokenEdit.apply();
         } catch (JSONException e) {
             e.printStackTrace();
         }

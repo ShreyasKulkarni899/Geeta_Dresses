@@ -80,7 +80,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@drawable/button_bg"
-            android:onClick="registerUser"
             android:text="Sign Up"
             android:textColor="#fff"
             android:transitionName="button_trans" />

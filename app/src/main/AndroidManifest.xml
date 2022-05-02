@@ -15,9 +15,13 @@
         android:theme="@style/Theme.WalkinSale"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".billToken"
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+        <activity
             android:name=".tokenDashboard"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
             android:name=".tokenNumberCreation"
             android:exported="false"

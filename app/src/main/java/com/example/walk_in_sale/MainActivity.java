@@ -9,8 +9,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.UUID;
-
 
 public class MainActivity extends AppCompatActivity {
     ViewPagerAdapter viewPagerAdapter;
