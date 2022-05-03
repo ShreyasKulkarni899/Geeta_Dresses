@@ -57,7 +57,7 @@ public class tokenDashboard extends AppCompatActivity {
         //User data part with SP
         userSP = getSharedPreferences("userMetadata", MODE_PRIVATE);
         userName.setText(userSP.getString("userName", ""));
-        currentTokenNumber.setText("Token No - " + userSP.getString("tokenNumber", ""));
+        currentTokenNumber.setText("Token No - "+userSP.getString("tokenNumber",""));
 
 
         //hocks
@@ -84,14 +84,26 @@ public class tokenDashboard extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d("Token Response", response.toString());
+                    //Log.d("Token Response",response.toString());
                     JSONArray data_array = response.getJSONArray("data");
                     JSONObject data = (JSONObject) data_array.get(0);
-                    Log.d("Token Data", data.toString());
-                    Log.d("Product Names", String.valueOf(data.getJSONArray("productName")));
-                    //JSONArray product_array = data.getJSONArray("")
+                    //Log.d("Token Data",data.toString());
+                   // Log.d("Product Names", String.valueOf(data.getJSONArray("productName")));
+                    JSONArray product_array = data.getJSONArray("product");
+                    Log.d("Product Array",product_array.toString());
+                    for(int i = 0; i < product_array.length(); i++)
+                    {
+                        JSONObject product = product_array.getJSONObject(i);
+                        String product_name = product.getString("productName");
+                        String qty = product.getString("quantity");
+                        Log.d("Product Name",product_name);
+                        Log.d("Quantity",qty);
+                        productsModelArrayList.add(new productsModel(product_name,qty));
+                        courseRV.setAdapter(new productAdapter(tokenDashboard.this, productsModelArrayList));
+
+                    }
                 } catch (JSONException e) {
-                    Log.d("Failed Token Data Request", e.toString());
+                    Log.d("Failed Token Data Request",e.toString());
                 }
             }
         }, new Response.ErrorListener() {
@@ -104,11 +116,13 @@ public class tokenDashboard extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
 
 
-        String productName = "Mens formal shirts";
-        String qty = "4";
-        for (int i = 1; i <= 5; i++) {
-            productsModelArrayList.add(new productsModel(productName, qty));
-        }
+    Log.d("Product Array List",productsModelArrayList.toString());
+
+//        String productName = "Mens formal shirts";
+//        String qty = "4";
+//        for(int i=1;i<=200;i++){
+//            productsModelArrayList.add(new productsModel(productName,qty));
+//        }
 
 
         // we are initializing our adapter class and passing our arraylist to it.

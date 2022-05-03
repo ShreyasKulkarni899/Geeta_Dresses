@@ -15,6 +15,12 @@
         android:theme="@style/Theme.WalkinSale"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".CounterIncentiveReport"
+            android:exported="false" />
+        <activity
+            android:name=".IncentiveReport"
+            android:exported="false" />
+        <activity
             android:name=".bill_cardview"
             android:exported="false" />
         <activity
