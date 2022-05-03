@@ -107,9 +107,9 @@ public class tokenDashboard extends AppCompatActivity {
 
         String productName = "Mens formal shirts";
         String qty = "4";
-//        for(int i=1;i<=200;i++){
-//            productsModelArrayList.add(new productsModel(productName,qty));
-//        }
+        for(int i=1;i<=200;i++){
+            productsModelArrayList.add(new productsModel(productName,qty));
+        }
 
 
         // we are initializing our adapter class and passing our arraylist to it.

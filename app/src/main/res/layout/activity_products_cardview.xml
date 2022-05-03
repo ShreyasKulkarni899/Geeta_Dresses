@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="60dp"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="5dp"
     app:cardElevation="2dp"
@@ -25,17 +25,18 @@
             android:layout_marginStart="15dp"
             android:text="ProductName"
             android:textColor="@color/black"
-            android:textSize="11sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/reduceBTN"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="-8dp"
+            android:layout_marginTop="-17dp"
             android:background="@drawable/ic_baseline_minimize_24"
             android:backgroundTint="@color/black"
+            android:contentDescription="Reduce button here"
             />
 
         <TextView
@@ -50,21 +51,23 @@
 
         <Button
             android:id="@+id/increaseBTN"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="15dp"
             android:background="@drawable/ic_plus_24px"
             android:backgroundTint="@color/black"
+            android:contentDescription="Delete button"
             />
 
         <Button
             android:id="@+id/productsDeleteBTN"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="30dp"
             android:background="@drawable/ic_baseline_delete_24"
             android:backgroundTint="#FC0000"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            android:contentDescription="Delete Button"
+            />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

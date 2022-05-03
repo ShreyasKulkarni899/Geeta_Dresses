@@ -5,7 +5,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -58,6 +57,8 @@ public class billToken extends AppCompatActivity {
         backBTN = findViewById(R.id.backButtonBillToken);
         printBTN = findViewById(R.id.printToDaBTN);
 
+        // here we have created new array list and added data to it.
+        listModelArrayList = new ArrayList<>();
 
 
 
@@ -66,21 +67,22 @@ public class billToken extends AppCompatActivity {
 
         String productName = "Mens formal shirts";
         String qty = "4";
-//        for(int i=1;i<=200;i++){
-//            productsModelArrayList.add(new productsModel(productName,qty));
-//        }
+        String price ="500";
+        for(int i=1;i<=200;i++){
+            listModelArrayList.add(new productsListModel(productName,qty,price));
+        }
 
 
         // we are initializing our adapter class and passing our arraylist to it.
-        //productAdapter productAdapter = new productAdapter(this, productsModelArrayList);
+        billAdaptor billAdaptor = new billAdaptor(this, listModelArrayList);
 
         // below line is for setting a layout manager for our recycler view.
         // here we are creating vertical list so we will provide orientation as vertical
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         // in below two lines we are setting layoutmanager and adapter to our recycler view.
-//        courseRV.setLayoutManager(linearLayoutManager);
-//        courseRV.setAdapter(productAdapter);
+        courseRV.setLayoutManager(linearLayoutManager);
+        courseRV.setAdapter(billAdaptor);
 
         //backBTN code
         backBTN.setOnClickListener(new View.OnClickListener() {

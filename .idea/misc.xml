@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Shreyas/Vedam Labs/Android/Enderman/app/src/main/res/layout/activity_bill_cardview.xml" value="0.25" />
+        <entry key="..\:/Shreyas/Vedam Labs/Android/Enderman/app/src/main/res/layout/activity_bill_token.xml" value="0.25" />
+        <entry key="..\:/Shreyas/Vedam Labs/Android/Enderman/app/src/main/res/layout/activity_products_cardview.xml" value="0.25" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Opsidian/app/src/main/res/drawable/button_bg.xml" value="0.1705" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Opsidian/app/src/main/res/drawable/dash_bg.xml" value="0.1975" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Opsidian/app/src/main/res/drawable/ic_back_btn.xml" value="0.2095" />
