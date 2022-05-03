@@ -57,7 +57,7 @@ public class tokenDashboard extends AppCompatActivity {
         //User data part with SP
         userSP = getSharedPreferences("userMetadata", MODE_PRIVATE);
         userName.setText(userSP.getString("userName", ""));
-        currentTokenNumber.setText("Token No - "+userSP.getString("tokenNumber",""));
+        currentTokenNumber.setText("Token No - " + userSP.getString("tokenNumber", ""));
 
 
         //hocks
@@ -84,14 +84,14 @@ public class tokenDashboard extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d("Token Response",response.toString());
+                    Log.d("Token Response", response.toString());
                     JSONArray data_array = response.getJSONArray("data");
                     JSONObject data = (JSONObject) data_array.get(0);
-                    Log.d("Token Data",data.toString());
+                    Log.d("Token Data", data.toString());
                     Log.d("Product Names", String.valueOf(data.getJSONArray("productName")));
                     //JSONArray product_array = data.getJSONArray("")
                 } catch (JSONException e) {
-                    Log.d("Failed Token Data Request",e.toString());
+                    Log.d("Failed Token Data Request", e.toString());
                 }
             }
         }, new Response.ErrorListener() {
@@ -104,11 +104,10 @@ public class tokenDashboard extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
 
 
-
         String productName = "Mens formal shirts";
         String qty = "4";
-        for(int i=1;i<=200;i++){
-            productsModelArrayList.add(new productsModel(productName,qty));
+        for (int i = 1; i <= 5; i++) {
+            productsModelArrayList.add(new productsModel(productName, qty));
         }
 
 
@@ -162,4 +161,5 @@ public class tokenDashboard extends AppCompatActivity {
             }
         });
     }
+
 }
