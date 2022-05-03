@@ -15,6 +15,9 @@
         android:theme="@style/Theme.WalkinSale"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".productFinder"
+            android:exported="false" />
+        <activity
             android:name=".CounterIncentiveReport"
             android:exported="false" />
         <activity
