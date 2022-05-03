@@ -69,6 +69,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.Viewfind
             itemView.findViewById(R.id.increaseBTN).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     Toast.makeText(context, "Reduces", Toast.LENGTH_LONG).show();
                 }
             });
@@ -77,6 +78,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.Viewfind
                 public void onClick(View view) {
                     productModelArrayList.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
+
                     Toast.makeText(context, "delete", Toast.LENGTH_LONG).show();
                 }
             });
