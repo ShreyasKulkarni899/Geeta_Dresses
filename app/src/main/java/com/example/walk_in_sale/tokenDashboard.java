@@ -74,7 +74,7 @@ public class tokenDashboard extends AppCompatActivity {
         // Using Constants
         constant = new Constant();
         // URL
-        String url = constant.getURL() + constant.getPORT() + constant.getGET_TOKEN_DETAILS() + "100";
+        String url = constant.getURL() + constant.getPORT() + constant.getGET_TOKEN_DETAILS() + userSP.getString("tokenNumber","");
         // Setting up request queue
         requestQueue = Volley.newRequestQueue(this);
         object = new JSONObject();
