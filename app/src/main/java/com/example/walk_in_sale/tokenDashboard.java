@@ -100,9 +100,11 @@ public class tokenDashboard extends AppCompatActivity {
                         JSONObject product = product_array.getJSONObject(i);
                         String product_name = product.getString("productName");
                         String qty = product.getString("quantity");
+                        String ActualPrice = product.getString("price");
+                        String totalPrice = String.valueOf(Integer.parseInt(qty)*Integer.parseInt(ActualPrice));
                         Log.d("Product Name",product_name);
                         Log.d("Quantity",qty);
-                        productsModelArrayList.add(new productsModel(product_name,qty));
+                        productsModelArrayList.add(new productsModel(product_name,qty,ActualPrice));
                         courseRV.setAdapter(new productAdapter(tokenDashboard.this, productsModelArrayList));
 
                     }
