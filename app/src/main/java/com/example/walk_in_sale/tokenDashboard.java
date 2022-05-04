@@ -176,7 +176,8 @@ public class tokenDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), billToken.class);
-                intent.putExtra("response", response_object.toString());
+                //intent.putExtra("response", response_object.toString());
+                intent.putExtra("productsModelArrayList",productsModelArrayList);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "Clicked on next", Toast.LENGTH_SHORT).show();
             }

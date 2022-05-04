@@ -1,6 +1,8 @@
 package com.example.walk_in_sale;
 
-public class productsModel {
+import java.io.Serializable;
+
+public class productsModel implements Serializable {
 
     private String product_name;
     private String product_qty;

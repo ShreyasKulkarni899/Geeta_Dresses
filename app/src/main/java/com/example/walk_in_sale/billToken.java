@@ -56,12 +56,12 @@ public class billToken extends AppCompatActivity {
         currentTokenNumber.setText("Token No - "+userSP.getString("tokenNumber",""));
 
         Intent intent = getIntent();
-        try {
-            response =  response = new JSONObject(intent.getStringExtra("response"));
-            Log.d("Response From Intent",response.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            response =  response = new JSONObject(intent.getStringExtra("response"));
+//            Log.d("Response From Intent",response.toString());
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
         //hocks
         courseRV = findViewById(R.id.idBillToken);
@@ -69,46 +69,46 @@ public class billToken extends AppCompatActivity {
         printBTN = findViewById(R.id.printToDaBTN);
 
         // here we have created new array list and added data to it.
-        listModelArrayList = new ArrayList<>();
+        listModelArrayList = (ArrayList<productsModel>) intent.getSerializableExtra("productsModelArrayList");
 
 
-        JSONArray data_array = null;
-        try {
-            data_array = response.getJSONArray("data");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JSONObject data = null;
-        try {
-            data = (JSONObject) data_array.get(0);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        //Log.d("Token Data",data.toString());
-        // Log.d("Product Names", String.valueOf(data.getJSONArray("productName")));
-        JSONArray product_array = null;
-        try {
-            product_array = data.getJSONArray("product");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.d("Product Array",product_array.toString());
-        for(int i = 0; i < product_array.length(); i++)
-        {
-            try {
-                JSONObject product = product_array.getJSONObject(i);
-                String product_name = product.getString("productName");
-                String qty = product.getString("quantity");
-                String price = product.getString("price");
-                Log.d("Product Name", product_name);
-                Log.d("Quantity", qty);
-                listModelArrayList.add(new productsModel(product_name, qty,price));
-                //courseRV.setAdapter(new productAdapter(billToken.this, listModelArrayList));
-            }catch (Exception e){
-
-            }
-        }
-        // Some Changes
+//        JSONArray data_array = null;
+//        try {
+//            data_array = response.getJSONArray("data");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        JSONObject data = null;
+//        try {
+//            data = (JSONObject) data_array.get(0);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        //Log.d("Token Data",data.toString());
+//        // Log.d("Product Names", String.valueOf(data.getJSONArray("productName")));
+//        JSONArray product_array = null;
+//        try {
+//            product_array = data.getJSONArray("product");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        Log.d("Product Array",product_array.toString());
+//        for(int i = 0; i < product_array.length(); i++)
+//        {
+//            try {
+//                JSONObject product = product_array.getJSONObject(i);
+//                String product_name = product.getString("productName");
+//                String qty = product.getString("quantity");
+//                String price = product.getString("price");
+//                Log.d("Product Name", product_name);
+//                Log.d("Quantity", qty);
+//                listModelArrayList.add(new productsModel(product_name, qty,price));
+//                //courseRV.setAdapter(new productAdapter(billToken.this, listModelArrayList));
+//            }catch (Exception e){
+//
+//            }
+//        }
+//        // Some Changes
 
 
 //        String productName = "Mens formal shirts";
