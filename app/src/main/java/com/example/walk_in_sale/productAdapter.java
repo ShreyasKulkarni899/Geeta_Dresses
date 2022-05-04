@@ -70,7 +70,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.Viewfind
                 @Override
                 public void onClick(View view) {
 
-                    Toast.makeText(context, "Reduces", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Increase", Toast.LENGTH_LONG).show();
                 }
             });
             itemView.findViewById(R.id.productsDeleteBTN).setOnClickListener(new View.OnClickListener() {

@@ -99,30 +99,35 @@
 
                 <TextView
                     android:id="@+id/textView7"
+                    android:layout_weight="8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="5dp"
                     android:fontFamily="@font/lexend_exa"
                     android:gravity="center|center_horizontal"
-                    android:text="Product                "
+                    android:text="Product"
+
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textView77"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_margin="10dp"
                     android:fontFamily="@font/lexend_exa"
                     android:gravity="center|center_horizontal"
-                    android:text="QTY  "
+                    android:text="QTY"
+
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textView777"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -130,6 +135,7 @@
                     android:fontFamily="@font/lexend_exa"
                     android:gravity="center|center_horizontal"
                     android:text="Price"
+
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
