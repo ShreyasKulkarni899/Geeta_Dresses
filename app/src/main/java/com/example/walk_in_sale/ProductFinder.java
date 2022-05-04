@@ -12,19 +12,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class productFinder extends AppCompatActivity {
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONObject;
+
+public class ProductFinder extends AppCompatActivity {
     EditText productId;
     TextView userName, currentTokenNumber , finderResult;
     SharedPreferences userSP;
     Button findBTN , nextBTN ,backBTN;
+    RequestQueue requestQueue;
+    JsonObjectRequest jsonObjectRequest;
+    JSONObject object;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_finder);
-        Window window = productFinder.this.getWindow();
+        Window window = ProductFinder.this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.setStatusBarColor(ContextCompat.getColor(productFinder.this, R.color.black));
+        window.setStatusBarColor(ContextCompat.getColor(ProductFinder.this, R.color.black));
         //hocks
         userName = findViewById(R.id.userNamePF);
         currentTokenNumber = findViewById(R.id.userCurrentPF);
@@ -50,7 +58,9 @@ public class productFinder extends AppCompatActivity {
         findBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Code for product finding herer
+                //Code for product finding here
+                //
+
             }
         });
         //nextBTN code

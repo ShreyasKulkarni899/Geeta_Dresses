@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -40,6 +41,7 @@ public class tokenDashboard extends AppCompatActivity {
     Button backBTN, barcodeBTN, scanBTN, nameBTN, nextBTN;
     TextView userName, currentTokenNumber;
     SharedPreferences userSP;
+    JSONObject response_object;
 
     // Arraylist for storing data
     private ArrayList<productsModel> productsModelArrayList;
@@ -74,7 +76,8 @@ public class tokenDashboard extends AppCompatActivity {
         // Using Constants
         constant = new Constant();
         // URL
-        String url = constant.getURL() + constant.getPORT() + constant.getGET_TOKEN_DETAILS() + userSP.getString("tokenNumber","");
+        String url = constant.getURL() + constant.getPORT() + constant.getGET_TOKEN_DETAILS() + "100";
+                //userSP.getString("tokenNumber","");
         // Setting up request queue
         requestQueue = Volley.newRequestQueue(this);
         object = new JSONObject();
@@ -84,6 +87,7 @@ public class tokenDashboard extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    response_object = response;
                     //Log.d("Token Response",response.toString());
                     JSONArray data_array = response.getJSONArray("data");
                     JSONObject data = (JSONObject) data_array.get(0);
@@ -169,8 +173,9 @@ public class tokenDashboard extends AppCompatActivity {
         nextBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent Intent = new Intent(getApplicationContext(), billToken.class);
-                startActivity(Intent);
+                Intent intent = new Intent(getApplicationContext(), billToken.class);
+                intent.putExtra("response", response_object.toString());
+                startActivity(intent);
                 Toast.makeText(getApplicationContext(), "Clicked on next", Toast.LENGTH_SHORT).show();
             }
         });

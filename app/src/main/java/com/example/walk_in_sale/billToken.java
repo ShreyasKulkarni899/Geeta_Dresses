@@ -5,8 +5,10 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,6 +20,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.walk_in_sale.constants.Constant;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -27,7 +31,7 @@ public class billToken extends AppCompatActivity {
     Constant constant;
     RequestQueue requestQueue;
     JsonObjectRequest jsonObjectRequest;
-    JSONObject object;
+    JSONObject response;
     Button backBTN, printBTN;
     TextView userName, currentTokenNumber;
     SharedPreferences userSP;
@@ -51,6 +55,13 @@ public class billToken extends AppCompatActivity {
         userName.setText(userSP.getString("userName", ""));
         currentTokenNumber.setText("Token No - "+userSP.getString("tokenNumber",""));
 
+        Intent intent = getIntent();
+        try {
+            response =  response = new JSONObject(intent.getStringExtra("response"));
+            Log.d("Response From Intent",response.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         //hocks
         courseRV = findViewById(R.id.idBillToken);
@@ -61,16 +72,50 @@ public class billToken extends AppCompatActivity {
         listModelArrayList = new ArrayList<>();
 
 
-
-
-
-
-        String productName = "Mens formal shirts";
-        String qty = "4";
-        String price ="500";
-        for(int i=1;i<=200;i++){
-            listModelArrayList.add(new productsListModel(productName,qty,price));
+        JSONArray data_array = null;
+        try {
+            data_array = response.getJSONArray("data");
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        JSONObject data = null;
+        try {
+            data = (JSONObject) data_array.get(0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //Log.d("Token Data",data.toString());
+        // Log.d("Product Names", String.valueOf(data.getJSONArray("productName")));
+        JSONArray product_array = null;
+        try {
+            product_array = data.getJSONArray("product");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("Product Array",product_array.toString());
+        for(int i = 0; i < product_array.length(); i++)
+        {
+            try {
+                JSONObject product = product_array.getJSONObject(i);
+                String product_name = product.getString("productName");
+                String qty = product.getString("quantity");
+                String price = product.getString("price");
+                Log.d("Product Name", product_name);
+                Log.d("Quantity", qty);
+                listModelArrayList.add(new productsListModel(product_name, qty,price));
+                //courseRV.setAdapter(new productAdapter(billToken.this, listModelArrayList));
+            }catch (Exception e){
+
+            }
+        }
+
+
+//        String productName = "Mens formal shirts";
+//        String qty = "4";
+//        String price ="500";
+//        for(int i=1;i<=200;i++){
+//            listModelArrayList.add(new productsListModel(productName,qty,price));
+//        }
 
 
         // we are initializing our adapter class and passing our arraylist to it.
