@@ -14,10 +14,10 @@ import java.util.ArrayList;
 public class billAdaptor extends RecyclerView.Adapter<billAdaptor.tokenViewHolder> {
 
     private final Context context;
-    private final ArrayList<productsListModel> productModelArrayList;
+    private final ArrayList<productsModel> productModelArrayList;
 
     // Constructor
-    public billAdaptor(Context context, ArrayList<productsListModel> productModelArrayList) {
+    public billAdaptor(Context context, ArrayList<productsModel> productModelArrayList) {
         this.context = context;
         this.productModelArrayList = productModelArrayList;
     }
@@ -33,10 +33,10 @@ public class billAdaptor extends RecyclerView.Adapter<billAdaptor.tokenViewHolde
     @Override
     public void onBindViewHolder(@NonNull tokenViewHolder holder, int position) {
         // to set data to textview and imageview of each card layout
-        productsListModel model = productModelArrayList.get(position);
+        productsModel model = productModelArrayList.get(position);
         holder.idProductName.setText(model.getproduct_name());
         holder.idProductQTY.setText(model.getproduct_qty());
-        holder.idProductPrice.setText(model.getproduct_prize());
+        holder.idProductPrice.setText(model.getProduct_prize());
     }
 
     @Override

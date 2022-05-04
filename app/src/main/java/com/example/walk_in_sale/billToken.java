@@ -38,7 +38,7 @@ public class billToken extends AppCompatActivity {
 
 
     //this is for the bill list
-    private ArrayList<productsListModel> listModelArrayList;
+    private ArrayList<productsModel> listModelArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +102,7 @@ public class billToken extends AppCompatActivity {
                 String price = product.getString("price");
                 Log.d("Product Name", product_name);
                 Log.d("Quantity", qty);
-                listModelArrayList.add(new productsListModel(product_name, qty,price));
+                listModelArrayList.add(new productsModel(product_name, qty,price));
                 //courseRV.setAdapter(new productAdapter(billToken.this, listModelArrayList));
             }catch (Exception e){
 
