@@ -78,6 +78,7 @@
             android:textAlignment="center"
             android:hint="Please add the Product ID"
             android:textColorHint="@color/white"/>
+
         <TextView
             android:id="@+id/finderResult"
             android:layout_width="350dp"
@@ -86,7 +87,6 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/lexend_exa"
             android:gravity="center|center_horizontal"
-            android:text="token no 2222"
             android:textColor="@color/black"
             android:textSize="14sp" />
         <LinearLayout

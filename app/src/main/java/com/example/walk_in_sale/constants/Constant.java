@@ -8,9 +8,14 @@ public class Constant {
     final  String GET_TOKEN = "/counter/getCurrentValue?sequenceName=tokenNumber";
     final String UPDATE_TOKEN = "/token/";
     final String GET_TOKEN_DETAILS = "/token?tokenNumber=";
+    final String PRODUCT_FINDER = "/product/getProduct?productId=";
 
     public String getGET_TOKEN_DETAILS() {
         return GET_TOKEN_DETAILS;
+    }
+
+    public String getPRODUCT_FINDER() {
+        return PRODUCT_FINDER;
     }
 
     public String getUPDATE_TOKEN() {

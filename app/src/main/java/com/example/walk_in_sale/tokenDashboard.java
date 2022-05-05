@@ -168,6 +168,9 @@ public class tokenDashboard extends AppCompatActivity {
         nameBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(tokenDashboard.this,ProductFinder.class);
+                intent.putExtra("activity","tokenDashboard");
+                startActivity(intent);
                 Toast.makeText(getApplicationContext(), "Clicked on Name", Toast.LENGTH_SHORT).show();
             }
         });
