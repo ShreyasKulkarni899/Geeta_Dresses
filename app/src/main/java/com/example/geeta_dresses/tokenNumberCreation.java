@@ -75,7 +75,7 @@ public class tokenNumberCreation extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), "Clicked on attend", Toast.LENGTH_SHORT).show();
                 String getTokenText = tokenNumber.getText().toString();
                 String userNameText = userName.getText().toString();
-                //updateToken(getTokenText,userNameText);
+                updateToken(getTokenText,userNameText);
                 Intent intent = new Intent(tokenNumberCreation.this,tokenDashboard.class);
                 startActivity(intent);
             }
