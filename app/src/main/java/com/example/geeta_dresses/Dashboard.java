@@ -1,4 +1,4 @@
-package com.example.walk_in_sale;
+package com.example.geeta_dresses;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,7 +27,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-    ExtendedFloatingActionButton addOrderbtn;
+    ExtendedFloatingActionButton addTokenbtn;
     SharedPreferences spLogin, spToken, spUserData;
     private long pressedTime;
 
@@ -46,7 +46,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbarHere);
-        addOrderbtn = findViewById(R.id.addOrderbtn);
+        addTokenbtn = findViewById(R.id.addTokenbtn);
 
 
         //Tool bar as action bar
@@ -64,8 +64,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         navigationView.setNavigationItemSelectedListener(this);
 
         //Floating button implementation
-        addOrderbtn.setOnClickListener(view -> {
-            Intent addOrderIntent = new Intent(getApplicationContext(), AddOrder.class);
+        addTokenbtn.setOnClickListener(view -> {
+            Intent addOrderIntent = new Intent(getApplicationContext(), tokenHome.class);
             startActivity(addOrderIntent);
             Toast.makeText(getApplicationContext(), "Clicked on add order", Toast.LENGTH_SHORT).show();
         });

@@ -33,7 +33,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.walk_in_sale"
+        applicationId "com.example.geeta_dresses"
         minSdk 21
         targetSdk 32
         versionCode 1

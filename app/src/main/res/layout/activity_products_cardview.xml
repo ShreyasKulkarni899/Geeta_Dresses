@@ -74,17 +74,7 @@
             android:backgroundTint="#FC0000"
             android:contentDescription="Delete Button"
             />
-        <TextView
-            android:id="@+id/idProductsPrice"
-            android:layout_weight="2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:drawablePadding="2dp"
-            android:text="2"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
+
 
 
     </LinearLayout>

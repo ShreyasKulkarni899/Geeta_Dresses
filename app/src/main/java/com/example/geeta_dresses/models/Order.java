@@ -1,4 +1,4 @@
-package com.example.walk_in_sale.models;
+package com.example.geeta_dresses.models;
 
 import java.util.Date;
 

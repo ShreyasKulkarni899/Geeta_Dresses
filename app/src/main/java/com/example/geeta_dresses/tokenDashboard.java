@@ -1,4 +1,4 @@
-package com.example.walk_in_sale;
+package com.example.geeta_dresses;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -9,7 +9,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -24,7 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.walk_in_sale.constants.Constant;
+import com.example.geeta_dresses.constants.Constant;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +37,7 @@ public class tokenDashboard extends AppCompatActivity {
     RequestQueue requestQueue;
     JsonObjectRequest jsonObjectRequest;
     JSONObject object;
-    Button backBTN, barcodeBTN, scanBTN, nameBTN, nextBTN;
+    Button backBTN, nameBTN, nextBTN;
     TextView userName, currentTokenNumber;
     SharedPreferences userSP;
     JSONObject response_object;
@@ -65,14 +64,30 @@ public class tokenDashboard extends AppCompatActivity {
         //hocks
         courseRV = findViewById(R.id.idRVCourse);
         backBTN = findViewById(R.id.backButtonTokenNumber);
-        barcodeBTN = findViewById(R.id.barcodeBTN);
-        scanBTN = findViewById(R.id.scanBTN);
         nameBTN = findViewById(R.id.nameBTN);
         nextBTN = findViewById(R.id.nextToDaBTN);
+
+
 
         // here we have created new array list and added data to it.
         productsModelArrayList = new ArrayList<>();
 
+        //Code for the intent from productFinder
+        String resultIN , product_nameIN,productIDIN, product_priceIN;
+        Bundle extras = getIntent().getExtras();
+        if(extras == null){
+            resultIN =null;
+            product_nameIN = null;
+            productIDIN = null;
+            product_priceIN= null;
+        }else{
+            resultIN = extras.getString("result");
+            product_nameIN = extras.getString("product_name");
+            productIDIN = extras.getString("productId");
+            product_priceIN =  "0";
+            Log.d("Data here Look",String.valueOf(extras));
+            productsModelArrayList.add(new productsModel(product_nameIN,"1",product_priceIN,productIDIN));
+        }
         // Using Constants
         constant = new Constant();
         // URL
@@ -101,10 +116,10 @@ public class tokenDashboard extends AppCompatActivity {
                         String product_name = product.getString("productName");
                         String qty = product.getString("quantity");
                         String ActualPrice = product.getString("price");
-                        String totalPrice = String.valueOf(Integer.parseInt(qty)*Integer.parseInt(ActualPrice));
+                        String productId = product.getString("productId");
                         Log.d("Product Name",product_name);
                         Log.d("Quantity",qty);
-                        productsModelArrayList.add(new productsModel(product_name,qty,ActualPrice));
+                        productsModelArrayList.add(new productsModel(product_name,qty,ActualPrice,productId));
                         courseRV.setAdapter(new productAdapter(tokenDashboard.this, productsModelArrayList));
 
                     }
@@ -150,20 +165,7 @@ public class tokenDashboard extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        //barcodeBTN code
-        barcodeBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Clicked on barcode", Toast.LENGTH_SHORT).show();
-            }
-        });
-        //scanBTN code
-        scanBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Clicked on Scan", Toast.LENGTH_SHORT).show();
-            }
-        });
+        
         //nameBTN code
         nameBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,7 +180,7 @@ public class tokenDashboard extends AppCompatActivity {
         nextBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), billToken.class);
+                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                 //intent.putExtra("response", response_object.toString());
                 intent.putExtra("productsModelArrayList",productsModelArrayList);
                 startActivity(intent);

@@ -71,7 +71,7 @@
             app:srcCompat="@drawable/icon1" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/addOrderbtn"
+            android:id="@+id/addTokenbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
@@ -79,7 +79,7 @@
             android:layout_marginTop="372dp"
             android:backgroundTint="@color/denim_blue"
             android:contentDescription="Add Order"
-            android:text="Add Order"
+            android:text="Add Token"
             android:textColor="@color/white"
             app:icon="@drawable/ic_plus_24px"
             app:iconTint="@color/white"

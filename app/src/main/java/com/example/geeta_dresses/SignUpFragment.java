@@ -1,4 +1,4 @@
-package com.example.walk_in_sale;
+package com.example.geeta_dresses;
 
 import android.os.Bundle;
 

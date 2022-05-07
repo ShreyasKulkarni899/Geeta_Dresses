@@ -1,4 +1,4 @@
-package com.example.walk_in_sale;
+package com.example.geeta_dresses;
 
 import android.content.Context;
 import android.util.Log;
@@ -38,8 +38,8 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.Viewfind
         productsModel model = productModelArrayList.get(position);
         holder.idProductName.setText(model.getproduct_name());
         holder.idProductQTY.setText(model.getproduct_qty());
-        holder.idProductPrice.setText(model.getProduct_prize());
         Log.d("Product Prixe",model.getProduct_prize());
+        Log.d("Product ID",model.getProduct_id());
 
     }
 
@@ -55,7 +55,6 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.Viewfind
     public class Viewfinder extends RecyclerView.ViewHolder {
         private final TextView idProductName;
         private final TextView idProductQTY;
-        private final TextView idProductPrice;
         private Context context;
 
         public Viewfinder(View itemView) {
@@ -63,14 +62,14 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.Viewfind
             context = itemView.getContext();
             idProductName = itemView.findViewById(R.id.idProductsName);
             idProductQTY = itemView.findViewById(R.id.idProductsQTY);
-            idProductPrice = itemView.findViewById(R.id.idProductsPrice);
+
 
 
             itemView.findViewById(R.id.reduceBTN).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     productModelArrayList.get(getAdapterPosition()).setproduct_qty(String.valueOf(Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getproduct_qty())-1));
-                    productModelArrayList.get(getAdapterPosition()).setProduct_prize(String.valueOf(Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getproduct_qty())*Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getProduct_prize())));
+                    //productModelArrayList.get(getAdapterPosition()).setProduct_prize(String.valueOf(Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getproduct_qty())*Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getProduct_prize())));
                     notifyItemChanged( getAdapterPosition() );
                     Toast.makeText(context, "Reduces", Toast.LENGTH_LONG).show();
                 }
@@ -79,7 +78,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.Viewfind
                 @Override
                 public void onClick(View view) {
                     productModelArrayList.get(getAdapterPosition()).setproduct_qty(String.valueOf(Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getproduct_qty()) +1));
-                    productModelArrayList.get(getAdapterPosition()).setProduct_prize(String.valueOf(Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getproduct_qty())*Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getProduct_prize())));
+                    //productModelArrayList.get(getAdapterPosition()).setProduct_prize(String.valueOf(Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getproduct_qty())*Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getProduct_prize())));
                     notifyItemChanged( getAdapterPosition() );
                     Toast.makeText(context, "Increase", Toast.LENGTH_LONG).show();
                 }

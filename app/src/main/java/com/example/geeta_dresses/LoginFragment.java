@@ -1,4 +1,4 @@
-package com.example.walk_in_sale;
+package com.example.geeta_dresses;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.walk_in_sale.constants.Constant;
+import com.example.geeta_dresses.constants.Constant;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONArray;
