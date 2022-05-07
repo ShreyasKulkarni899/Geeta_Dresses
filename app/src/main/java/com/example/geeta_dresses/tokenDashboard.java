@@ -47,6 +47,7 @@ public class tokenDashboard extends AppCompatActivity {
     JSONObject response_object;
     InquiryModel inquiryModel;
 
+
     // Arraylist for storing data
     private ArrayList<productsModel> productsModelArrayList;
     @Override
@@ -202,8 +203,31 @@ public class tokenDashboard extends AppCompatActivity {
                 inquiryModel.setProductsModelArrayList(productsModelArrayList);
 
                 //intent.putExtra("productsModelArrayList",productsModelArrayList);
+                try {
+                    constant = new Constant();
+                    object = new JSONObject(inquiryModel.toString());
+                    String url = constant.getURL() + constant.getPORT() + constant.getUPDATE_TOKEN();
 
-                Log.d("Inquiry",inquiryModel.toString());
+                    jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.d("InquiryModel",response.toString());
+                            Toast.makeText(tokenDashboard.this,"Inquiry Added",Toast.LENGTH_SHORT).show();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(tokenDashboard.this,"Failed To Add Inquiry",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    requestQueue.add(jsonObjectRequest);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                };
+
+
+
+                //Log.d("Inquiry",inquiryModel.toString());
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "Clicked on next", Toast.LENGTH_SHORT).show();
             }

@@ -7,7 +7,7 @@ public class Constant {
     final  String USER_LOGIN = "/user/login";
     final  String GET_TOKEN = "/counter/getCurrentValue?sequenceName=InquiryNumber";
     final String UPDATE_TOKEN = "/inquiry/";
-    final String GET_TOKEN_DETAILS = "//inquiry?tokenNumber=";
+    final String GET_TOKEN_DETAILS = "/inquiry?tokenNumber=";
     final String PRODUCT_FINDER = "/product/getProduct?productId=";
 
     public String getGET_TOKEN_DETAILS() {
