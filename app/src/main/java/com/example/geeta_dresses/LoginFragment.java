@@ -115,6 +115,7 @@ public class LoginFragment extends Fragment {
                                 SharedPreferences.Editor userEditor = userSP.edit();
                                 userEditor.putString("userName", data.getString("userName"));
                                 userEditor.putString("userEmail", data.getString("userEmail"));
+                                userEditor.putString("userId",data.getString("id"));
                                 userEditor.apply();
                                 Log.d("User Name",data.getString("userName"));
                                 Log.d("User Email",data.getString("userEmail"));

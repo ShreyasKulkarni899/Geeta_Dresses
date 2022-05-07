@@ -44,4 +44,14 @@ public class productsModel implements Serializable {
     public  String getProduct_id(){ return  product_id;}
 
     public void setProduct_id(String product_prize){this.product_id = product_id;}
+
+    @Override
+    public String toString() {
+        return "{" +
+                "productName:'" + product_name + '\'' +
+                ", quantity:'" + product_qty + '\'' +
+                ", price:'" + product_prize + '\'' +
+                ", productId:'" + product_id + '\'' +
+                '}';
+    }
 }

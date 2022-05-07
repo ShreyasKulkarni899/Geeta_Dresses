@@ -24,12 +24,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.geeta_dresses.constants.Constant;
+import com.example.geeta_dresses.models.InquiryModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class tokenDashboard extends AppCompatActivity {
     private RecyclerView courseRV;
@@ -41,6 +45,7 @@ public class tokenDashboard extends AppCompatActivity {
     TextView userName, currentTokenNumber;
     SharedPreferences userSP;
     JSONObject response_object;
+    InquiryModel inquiryModel;
 
     // Arraylist for storing data
     private ArrayList<productsModel> productsModelArrayList;
@@ -182,7 +187,23 @@ public class tokenDashboard extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                 //intent.putExtra("response", response_object.toString());
-                intent.putExtra("productsModelArrayList",productsModelArrayList);
+
+                inquiryModel = new InquiryModel();
+                inquiryModel.setUserId(userSP.getString("userId",""));
+                inquiryModel.setUserName(userSP.getString("userName",""));
+                inquiryModel.setCustomerId("Cutomer ID");
+                inquiryModel.setTokenNumber(userSP.getString("tokenNumber",""));
+                inquiryModel.setReason("Some Reason");
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Date date = new Date();
+                inquiryModel.setDay(dateFormat.format(date).toString());
+                inquiryModel.setEnquired(true);
+                inquiryModel.setPurchased(true);
+                inquiryModel.setProductsModelArrayList(productsModelArrayList);
+
+                //intent.putExtra("productsModelArrayList",productsModelArrayList);
+
+                Log.d("Inquiry",inquiryModel.toString());
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "Clicked on next", Toast.LENGTH_SHORT).show();
             }
