@@ -59,9 +59,9 @@ public class tokenHome extends AppCompatActivity {
         existingBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent createTokenIntent = new Intent(getApplicationContext(), crateToken.class);
-                //startActivity(createTokenIntent);
-                Toast.makeText(getApplicationContext(), "Clicked on Existing Token", Toast.LENGTH_SHORT).show();
+                Intent exisitingTokenIntent = new Intent(getApplicationContext(), ExistingToken.class);
+                startActivity(exisitingTokenIntent);
+                //Toast.makeText(getApplicationContext(), "Clicked on Existing Token", Toast.LENGTH_SHORT).show();
             }
         });
     }
