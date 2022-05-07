@@ -191,7 +191,7 @@ public class tokenDashboard extends AppCompatActivity {
                 inquiryModel = new InquiryModel();
                 inquiryModel.setUserId(userSP.getString("userId",""));
                 inquiryModel.setUserName(userSP.getString("userName",""));
-                inquiryModel.setCustomerId("Cutomer ID");
+                inquiryModel.setCustomerId("Customer ID");
                 inquiryModel.setTokenNumber(userSP.getString("tokenNumber",""));
                 inquiryModel.setReason("Some Reason");
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
