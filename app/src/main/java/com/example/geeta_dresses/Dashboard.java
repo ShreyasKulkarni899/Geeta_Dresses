@@ -67,7 +67,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         addTokenbtn.setOnClickListener(view -> {
             Intent addOrderIntent = new Intent(getApplicationContext(), tokenHome.class);
             startActivity(addOrderIntent);
-            Toast.makeText(getApplicationContext(), "Clicked on add order", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Clicked on add order", Toast.LENGTH_SHORT).show();
         });
 
 

@@ -3,17 +3,23 @@ package com.example.geeta_dresses;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.coordinatorlayout
+        .widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +31,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.geeta_dresses.constants.Constant;
 import com.example.geeta_dresses.models.InquiryModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +46,8 @@ public class tokenDashboard extends AppCompatActivity {
     private RecyclerView courseRV;
     Constant constant;
     RequestQueue requestQueue;
+    Switch inquiredSW , purchasedSW;
+    EditText reasonETV;
     JsonObjectRequest jsonObjectRequest;
     JSONObject object;
     Button backBTN, nameBTN, nextBTN;
@@ -72,7 +81,9 @@ public class tokenDashboard extends AppCompatActivity {
         backBTN = findViewById(R.id.backButtonTokenNumber);
         nameBTN = findViewById(R.id.nameBTN);
         nextBTN = findViewById(R.id.nextToDaBTN);
-
+        reasonETV = findViewById(R.id.prouctReasonPF);
+        inquiredSW = findViewById(R.id.InquirySW);
+        purchasedSW = findViewById(R.id.PurchasedSW);
 
 
         // here we have created new array list and added data to it.
@@ -97,7 +108,7 @@ public class tokenDashboard extends AppCompatActivity {
         // Using Constants
         constant = new Constant();
         // URL
-        String url = constant.getURL() + constant.getPORT() + constant.getGET_TOKEN_DETAILS() + "100";
+        String url = constant.getURL() + constant.getPORT() + constant.getGET_TOKEN_DETAILS() + userSP.getString("tokenNumber","");
                 //userSP.getString("tokenNumber","");
         // Setting up request queue
         requestQueue = Volley.newRequestQueue(this);
@@ -189,30 +200,32 @@ public class tokenDashboard extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                 //intent.putExtra("response", response_object.toString());
 
+
                 inquiryModel = new InquiryModel();
                 inquiryModel.setUserId(userSP.getString("userId",""));
                 inquiryModel.setUserName(userSP.getString("userName",""));
                 inquiryModel.setCustomerId("Customer ID");
                 inquiryModel.setTokenNumber(userSP.getString("tokenNumber",""));
-                inquiryModel.setReason("Some Reason");
+                inquiryModel.setReason(reasonETV.getText().toString());
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Date date = new Date();
                 inquiryModel.setDay(dateFormat.format(date).toString());
-                inquiryModel.setEnquired(true);
-                inquiryModel.setPurchased(true);
+                inquiryModel.setEnquired(inquiredSW.isChecked());
+                inquiryModel.setPurchased(purchasedSW.isChecked());
                 inquiryModel.setProductsModelArrayList(productsModelArrayList);
 
                 //intent.putExtra("productsModelArrayList",productsModelArrayList);
                 try {
                     constant = new Constant();
                     object = new JSONObject(inquiryModel.toString());
-                    String url = constant.getURL() + constant.getPORT() + constant.getUPDATE_TOKEN();
+                    String url = constant.getURL() + constant.getPORT() + constant.getGET_TOKEN_DETAILS() + userSP.getString("tokenNumber","") ;
 
-                    jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object, new Response.Listener<JSONObject>() {
+                    jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, object, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.d("InquiryModel",response.toString());
                             Toast.makeText(tokenDashboard.this,"Inquiry Added",Toast.LENGTH_SHORT).show();
+
                         }
                     }, new Response.ErrorListener() {
                         @Override
@@ -225,11 +238,12 @@ public class tokenDashboard extends AppCompatActivity {
                     e.printStackTrace();
                 };
 
-
-
                 //Log.d("Inquiry",inquiryModel.toString());
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(), "Clicked on next", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Clicked on next", Toast.LENGTH_SHORT).show();
+
+
+
             }
         });
     }
