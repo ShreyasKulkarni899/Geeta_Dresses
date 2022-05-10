@@ -1,13 +1,16 @@
 package com.example.geeta_dresses;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.MenuItem;
 
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,21 +20,44 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.geeta_dresses.constants.Constant;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //variable
+    private RecyclerView courseRV;
+    Constant constant;
+    JsonObjectRequest jsonObjectRequest;
+    JSONObject object;
+    RequestQueue requestQueue;
+    JSONObject response_object;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
     ExtendedFloatingActionButton addTokenbtn;
     SharedPreferences spLogin, spToken, spUserData;
+    TextView inquiryCount;
     private long pressedTime;
 
-
+    // Arraylist for storing data
+    private ArrayList<inquiryModel> inquiryModelArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +69,12 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         window.setStatusBarColor(ContextCompat.getColor(Dashboard.this, R.color.black));
 
         //hocks
+        courseRV = findViewById(R.id.idInquiryRV);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbarHere);
         addTokenbtn = findViewById(R.id.addTokenbtn);
-
+        inquiryCount = findViewById(R.id.textView4);
 
         //Tool bar as action bar
         setSupportActionBar(toolbar);
@@ -62,6 +89,85 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        // here we have created new array list and added data to it.
+        inquiryModelArrayList = new ArrayList<>();
+
+        // Using Constants
+        constant = new Constant();
+        // URL
+        String url = constant.getURL() + constant.getPORT() + constant.getUPDATE_TOKEN();
+        //userSP.getString("tokenNumber","");
+        // Setting up request queue
+        requestQueue = Volley.newRequestQueue(this);
+        object = new JSONObject();
+
+        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, object, new Response.Listener<JSONObject>() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    response_object = response;
+                    //Log.d("Token Response",response.toString());
+                    JSONArray data_array = response.getJSONArray("data");
+                    Log.d("Data_araay herer", String.valueOf(data_array));
+
+                    //JSONObject data = (JSONObject) data_array.get(0);
+                    //Log.d("Token Data",data.toString());
+                    // Log.d("Product Names", String.valueOf(data.getJSONArray("productName")));
+                    //JSONArray product_array = data.getJSONArray("product");
+                    //Log.d("Product Array",product_array.toString());
+                    inquiryCount.setText("Total inquiries - " + data_array.length());
+                    for(int i = 0; i < data_array.length(); i++)
+                    {
+                        //JSONObject product = product_array.getJSONObject(i);
+                        JSONObject data = (JSONObject) data_array.get(i);
+                        String inquiryNo = data.getString("tokenNumber");
+                        String inquiryUser = data.getString("username");
+                        String rawDay = data.getString("createdAt");
+                        String inquiryDay = rawDay.substring(0,10);
+
+                        inquiryModelArrayList.add(new inquiryModel(inquiryNo,inquiryUser,inquiryDay));
+                        courseRV.setAdapter(new inquiryAdapter(Dashboard.this, inquiryModelArrayList));
+
+                    }
+                } catch (JSONException e) {
+                    Log.d("Failed Token Data Request",e.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        requestQueue.add(jsonObjectRequest);
+
+
+        Log.d("Product Array List",inquiryModelArrayList.toString());
+
+
+        //        String productName = "Mens formal shirts";
+//        String qty = "4";
+//        for(int i=1;i<=200;i++){
+//            productsModelArrayList.add(new productsModel(productName,qty));
+//        }
+
+//        for(int i=1; i<= 200;i++){
+//            inquiryModelArrayList.add(new inquiryModel(String.valueOf(i),"Smith Johnson","2022/05/07 14:10:07"));
+//        }
+
+        // we are initializing our adapter class and passing our arraylist to it.
+        inquiryAdapter inquiryAdapter = new inquiryAdapter(this, inquiryModelArrayList);
+
+        // below line is for setting a layout manager for our recycler view.
+        // here we are creating vertical list so we will provide orientation as vertical
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        // in below two lines we are setting layoutmanager and adapter to our recycler view.
+        courseRV.setLayoutManager(linearLayoutManager);
+        courseRV.setAdapter(inquiryAdapter);
 
         //Floating button implementation
         addTokenbtn.setOnClickListener(view -> {

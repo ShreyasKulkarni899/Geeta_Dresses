@@ -3,9 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Geeta_Dresses_v1/app/src/main/res/layout/activity_existing_token.xml" value="0.25" />
-        <entry key="..\:/Geeta_Dresses_v1/app/src/main/res/layout/activity_token_dashboard.xml" value="0.25" />
-        <entry key="..\:/Geeta_Dresses_v1/app/src/main/res/layout/activity_token_number.xml" value="0.2246376811594203" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Enderman/app/src/main/res/drawable/ic_token.xml" value="0.231" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Enderman/app/src/main/res/drawable/recyler_back.xml" value="0.231" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Enderman/app/src/main/res/layout/activity_bill_cardview.xml" value="0.25" />
@@ -14,6 +11,10 @@
         <entry key="..\:/Shreyas/Vedam Labs/Android/Enderman/app/src/main/res/layout/activity_incentive_report.xml" value="0.25" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Enderman/app/src/main/res/layout/activity_product_finder.xml" value="0.25" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Enderman/app/src/main/res/layout/activity_products_cardview.xml" value="0.25" />
+        <entry key="..\:/Shreyas/Vedam Labs/Android/Geeta-Dresses-Project/Golem/app/src/main/res/layout/activity_dashboard.xml" value="0.25" />
+        <entry key="..\:/Shreyas/Vedam Labs/Android/Geeta-Dresses-Project/Golem/app/src/main/res/layout/activity_inquiry_cardview.xml" value="0.264" />
+        <entry key="..\:/Shreyas/Vedam Labs/Android/Geeta-Dresses-Project/Golem/app/src/main/res/layout/activity_products_cardview.xml" value="0.1" />
+        <entry key="..\:/Shreyas/Vedam Labs/Android/Geeta-Dresses-Project/Golem/app/src/main/res/layout/activity_token_dashboard.xml" value="0.1" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Geeta-Dresses-Project/Pillergers/app/src/main/res/layout/activity_dashboard.xml" value="0.25" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Geeta-Dresses-Project/Pillergers/app/src/main/res/layout/activity_product_finder.xml" value="0.20512820512820512" />
         <entry key="..\:/Shreyas/Vedam Labs/Android/Geeta-Dresses-Project/Pillergers/app/src/main/res/layout/activity_products_cardview.xml" value="0.4" />
