@@ -27,7 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ProductFinder extends AppCompatActivity {
-    EditText productId, productName;
+    EditText productId, productName, productPrice;
     TextView userName, currentTokenNumber;
     SharedPreferences userSP;
     Button nextBTN, backBTN;
@@ -50,6 +50,7 @@ public class ProductFinder extends AppCompatActivity {
         currentTokenNumber = findViewById(R.id.userCurrentPF);
         productId = findViewById(R.id.prouctIdPF);
         productName = findViewById(R.id.prouctNamePF);
+        productPrice = findViewById(R.id.prouctPricePF);
         nextBTN = findViewById(R.id.nextPFBTN);
         backBTN = findViewById(R.id.backBTNPF);
         //User data part with SP
@@ -74,20 +75,18 @@ public class ProductFinder extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProductFinder.this, tokenDashboard.class);
-                intent.putExtra("activity", "ProductFinder");
-                intent.putExtra("result", "OK");
-                intent.putExtra("product_name", productName.getText().toString());
-                intent.putExtra("productId", productId.getText().toString());
-//                if (!product_name.isEmpty() && !product_price.isEmpty() && !productId.getText().toString().isEmpty()) {
-//                    intent.putExtra("result","OK");
-//                    intent.putExtra("product_name", productName.getText().toString());
-//                    intent.putExtra("productId", productId.getText().toString());
-//                }
-//                else{
-//                    intent.putExtra("result","NOK");
-//                }
-                startActivity(intent);
 
+                if (!productName.getText().toString().isEmpty() && !productPrice.getText().toString().isEmpty() && !productId.getText().toString().isEmpty()) {
+                    intent.putExtra("activity", "ProductFinder");
+                    intent.putExtra("result", "OK");
+                    intent.putExtra("product_name", productName.getText().toString());
+                    intent.putExtra("productId", productId.getText().toString());
+                    intent.putExtra("productPrice", productPrice.getText().toString());
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Please input all the above boxes", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

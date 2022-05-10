@@ -71,7 +71,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.Viewfind
                     productModelArrayList.get(getAdapterPosition()).setproduct_qty(String.valueOf(Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getproduct_qty())-1));
                     //productModelArrayList.get(getAdapterPosition()).setProduct_prize(String.valueOf(Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getproduct_qty())*Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getProduct_prize())));
                     notifyItemChanged( getAdapterPosition() );
-                    Toast.makeText(context, "Reduces", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(context, "Reduces", Toast.LENGTH_LONG).show();
                 }
             });
             itemView.findViewById(R.id.increaseBTN).setOnClickListener(new View.OnClickListener() {
@@ -80,7 +80,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.Viewfind
                     productModelArrayList.get(getAdapterPosition()).setproduct_qty(String.valueOf(Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getproduct_qty()) +1));
                     //productModelArrayList.get(getAdapterPosition()).setProduct_prize(String.valueOf(Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getproduct_qty())*Integer.parseInt(productModelArrayList.get(getAdapterPosition()).getProduct_prize())));
                     notifyItemChanged( getAdapterPosition() );
-                    Toast.makeText(context, "Increase", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(context, "Increase", Toast.LENGTH_LONG).show();
                 }
             });
             itemView.findViewById(R.id.productsDeleteBTN).setOnClickListener(new View.OnClickListener() {
@@ -92,14 +92,14 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.Viewfind
                     Toast.makeText(context, "delete", Toast.LENGTH_LONG).show();
                 }
             });
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    productModelArrayList.remove(getAdapterPosition());
-                    notifyItemRemoved(getAdapterPosition());
-                    return true;
-                }
-            });
+//            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//                @Override
+//                public boolean onLongClick(View view) {
+//                    productModelArrayList.remove(getAdapterPosition());
+//                    notifyItemRemoved(getAdapterPosition());
+//                    return true;
+//                }
+//            });
         }
     }
 }

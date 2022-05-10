@@ -89,6 +89,16 @@
             android:hint="Please add the Product Name"
             android:textColorHint="@color/white"/>
 
+        <EditText
+            android:id="@+id/prouctPricePF"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/recyler_back"
+            android:textAlignment="center"
+            android:hint="Please add the Product Price"
+            android:textColorHint="@color/white"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
