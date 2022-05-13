@@ -37,6 +37,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -52,7 +53,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     NavigationView navigationView;
     Toolbar toolbar;
     ExtendedFloatingActionButton addTokenbtn;
-    SharedPreferences spLogin, spToken, spUserData;
+    SharedPreferences spLogin, spToken, spUserData,userSP;
     TextView inquiryCount;
     private long pressedTime;
 
@@ -75,6 +76,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         toolbar = findViewById(R.id.toolbarHere);
         addTokenbtn = findViewById(R.id.addTokenbtn);
         inquiryCount = findViewById(R.id.textView4);
+        //User data part with SP
+        userSP = getSharedPreferences("userMetadata", MODE_PRIVATE);
 
         //Tool bar as action bar
         setSupportActionBar(toolbar);
@@ -110,7 +113,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                     response_object = response;
                     //Log.d("Token Response",response.toString());
                     JSONArray data_array = response.getJSONArray("data");
-                    Log.d("Data_araay herer", String.valueOf(data_array));
+                    //Log.d("Data_araay herer", String.valueOf(data_array));
 
                     //JSONObject data = (JSONObject) data_array.get(0);
                     //Log.d("Token Data",data.toString());
@@ -127,7 +130,29 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                         String rawDay = data.getString("createdAt");
                         String inquiryDay = rawDay.substring(0,10);
 
-                        inquiryModelArrayList.add(new inquiryModel(inquiryNo,inquiryUser,inquiryDay));
+                        String[] mobileArray = {};//= {"Android","IPhone","WindowsMobile","Blackberry",
+//                                "WebOS","Ubuntu","Windows7","Max OS X"};
+                        ArrayList<String> productArray = new ArrayList<String>();
+                        JSONArray product_array = data.getJSONArray("product");
+                        Log.d("Product_array_dialog",String.valueOf(product_array));
+                        for(int j=0;j< product_array.length();j++){
+                            JSONObject product = product_array.getJSONObject(j);
+                            String product_name = product.getString("productName");
+                            String qty = product.getString("quantity");
+                            productArray.add(product_name +"                 "+ qty);
+                        }
+                        mobileArray = productArray.toArray(mobileArray);
+                        Boolean isInquired = data.getBoolean("isEnquired");
+                        Boolean isPurchased = data.getBoolean("isPurchased");
+                        String userRole = userSP.getString("userRole","");
+                        Boolean isManger;
+                        if(userRole.equals("manager")){
+                            isManger = true;
+                        }else{
+                            isManger = false;
+                        }
+                        Log.d("UserRolle", String.valueOf(isManger));
+                        inquiryModelArrayList.add(new inquiryModel(inquiryNo,inquiryUser,inquiryDay,mobileArray,isInquired,isPurchased,isManger));
                         courseRV.setAdapter(new inquiryAdapter(Dashboard.this, inquiryModelArrayList));
 
                     }

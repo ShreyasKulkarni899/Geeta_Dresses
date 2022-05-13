@@ -116,6 +116,8 @@ public class LoginFragment extends Fragment {
                                 userEditor.putString("userName", data.getString("userName"));
                                 userEditor.putString("userEmail", data.getString("userEmail"));
                                 userEditor.putString("userId",data.getString("id"));
+                                userEditor.putString("userType",data.getString("userType"));
+                                userEditor.putString("userRole",data.getString("userRole"));
                                 userEditor.apply();
                                 Log.d("User Name",data.getString("userName"));
                                 Log.d("User Email",data.getString("userEmail"));

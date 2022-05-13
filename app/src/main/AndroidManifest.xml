@@ -15,6 +15,9 @@
         android:theme="@style/Theme.WalkinSale"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".listView"
+            android:exported="false" />
+        <activity
             android:name=".ExistingToken"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
